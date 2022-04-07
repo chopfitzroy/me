@@ -1,23 +1,9 @@
 import TM from "next-transpile-modules";
-import MDX from '@next/mdx';
-import rehypeRaw from 'rehype-raw';
 import withPlugins from 'next-compose-plugins';
-import remarkShikiTwoslash from 'remark-shiki-twoslash';
 
-import { nodeTypes } from '@mdx-js/mdx';
-
+import { withContentlayer } from 'next-contentlayer';
 
 const withTM = TM(["ui"]);
-
-const withMDX = MDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [[remarkShikiTwoslash.default, { theme: "dark-plus" }]],
-    rehypePlugins: [rehypeRaw, { passThrough: nodeTypes }],
-    // If you use `MDXProvider`, uncomment the following line.
-    // providerImportSource: "@mdx-js/react",
-  },
-})
 
 const nextConfig = {
   webpack: (config) => {
@@ -37,10 +23,7 @@ export default withPlugins(
     [withTM, {
       reactStrictMode: true,
     }],
-    [withMDX, {
-      // Append the default value with md extensions
-      pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-    }]
+    [withContentlayer]
   ],
   nextConfig
 )
