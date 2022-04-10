@@ -1,3 +1,8 @@
+/* https://tailwindcss.com/docs/guides/nextjs */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* All of this code comes form the `remark-shiki-twoslash` docs */
 /* https://github.com/shikijs/twoslash/blob/main/packages/remark-shiki-twoslash/README.md */
 pre {
