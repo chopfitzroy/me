@@ -1,2 +1,1 @@
-import * as React from "react";
-export * from "./Button";
+export { BlogMetadata } from "./components/blog/metadata";
