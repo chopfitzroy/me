@@ -35,9 +35,12 @@ export default makeSource({
   mdx: {
     remarkPlugins: [
       remarkGfm,
-      // @ts-ignore
-      // - https://github.com/shikijs/twoslash/issues/147
-      [remarkShikiTwoslash.default, { theme: "solarized-light" }],
+      [
+        // @ts-ignore
+        // - https://github.com/shikijs/twoslash/issues/147
+        remarkShikiTwoslash.default,
+        { themes: ["github-dark", "github-light"] },
+      ],
     ],
     // - Fixes Shiki not being able to handle `raw` type
     // - https://github.com/shikijs/twoslash/issues/125

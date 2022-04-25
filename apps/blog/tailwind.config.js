@@ -2,6 +2,7 @@ const theme = require("tailwindcss/defaultTheme");
 const { fontFamily: font } = theme;
 
 module.exports = {
+  darkMode: 'class',
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -10,8 +11,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['Playfair Display', ...font.sans],
-        body: ['Source Sans Pro', ...font.sans],
+        body: ['Quattrocento', ...font.sans],
+        heading: ['Oswald', ...font.sans],
       },
       // NOTE: Tailwind prose plugin ✨
       // https://tailwindcss.com/docs/typography-plugin
@@ -20,9 +21,9 @@ module.exports = {
           css: {
             // Needs to convert to valid CSS
             // - https://github.com/tailwindlabs/tailwindcss-typography/issues/230
-            fontFamily: `'Source Sans Pro', ${theme('fontFamily.sans').join(', ')}`,
+            fontFamily: `'Quattrocento', ${theme('fontFamily.sans').join(', ')}`,
             'h1,h2,h3,h4': {
-              fontFamily: `'Playfair Display', ${theme('fontFamily.sans').join(', ')}`
+              fontFamily: `'Oswald', ${theme('fontFamily.sans').join(', ')}`
             },
           }
         }

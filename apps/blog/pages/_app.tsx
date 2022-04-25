@@ -1,6 +1,19 @@
-import '../assets/styles/main.css';
+import { LightDarkWrapper } from "../components/LightDarkWrapper";
+import { PreferencesProvider } from "../context/Preferences/PreferencesContext";
 
-// This default export is required in a new `pages/_app.js` file.
-export default function MyApp({ Component, pageProps }) {
-    return <Component {...pageProps} />
-}
+import "../assets/styles/main.css";
+
+// TODO
+// - Type this entire file properly
+
+const App = ({ Component, pageProps }) => {
+  return (
+    <PreferencesProvider>
+      <LightDarkWrapper>
+        <Component {...pageProps} />
+      </LightDarkWrapper>
+    </PreferencesProvider>
+  );
+};
+
+export default App;
