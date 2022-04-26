@@ -2,6 +2,8 @@ import { useWindupString } from "windups";
 
 interface BlogMetadataProps {
   title: string;
+  description: string;
+  publishedAt: string;
   // TODO type `readingTime` properly
   readingTime: any;
   className?: string;
@@ -10,6 +12,8 @@ interface BlogMetadataProps {
 type BlogMetadataSignature = (props: BlogMetadataProps) => JSX.Element;
 const BlogMetadata: BlogMetadataSignature = ({
   title,
+  description,
+  publishedAt,
   readingTime,
   className = "",
 }) => {
@@ -17,7 +21,11 @@ const BlogMetadata: BlogMetadataSignature = ({
 
   return (
     <div className={className}>
-      <h1 className="text-3xl font-heading font-bold">{animatedTitle}</h1>
+      <h1 className="bg-clip-text bg-gradient-to-r text-transparent text-5xl leading-loose font-heading font-bold from-pink-500 via-red-500 to-yellow-500 dark:from-green-300 dark:via-blue-500 dark:to-purple-600">
+        {animatedTitle}
+      </h1>
+      <h2 className="font-body dark:text-slate-200">{description}</h2>
+      <p className="font-body dark:text-slate-200">{publishedAt}</p>
     </div>
   );
 };

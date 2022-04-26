@@ -1,13 +1,13 @@
 import { useState, createContext } from "react";
 
-export type ColorTheme = "dark" | "light" | "system";
+export type ColorTheme = "dark" | "light";
 
 // TODO
 // - Type this entire file properly
 const PreferencesContext = createContext(undefined);
 
 const PreferencesProvider = ({ children }) => {
-  const [colorTheme, setColorTheme] = useState<ColorTheme>("system");
+  const [colorTheme, setColorTheme] = useState<ColorTheme>("light");
   const value = { colorTheme, setColorTheme };
   return (
     <PreferencesContext.Provider value={value}>

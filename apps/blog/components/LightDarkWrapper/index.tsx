@@ -1,7 +1,7 @@
 import { useLightDarkWrapper } from "./useLightDarkWrapper";
 
 interface LightDarkWrapperProps {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }
 
 type LightDarkWrapperSignature = (props: LightDarkWrapperProps) => JSX.Element;

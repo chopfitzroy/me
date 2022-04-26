@@ -26,6 +26,14 @@ module.exports = {
               fontFamily: `'Oswald', ${theme('fontFamily.sans').join(', ')}`
             },
           }
+        },
+        dark: {
+          css: {
+            color: theme('colors.slate.200'),
+            'h1,h2,h3,h4': {
+              color: theme('colors.slate.200'),
+            }
+          }
         }
       })
     },

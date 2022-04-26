@@ -10,23 +10,17 @@ const useLightDarkWrapper: UseLightDarkWrapperSignature = () => {
   const { colorTheme } = usePreferences();
 
   const className = useMemo<string>(() => {
-    // Catch server render
-    // - https://stackoverflow.com/questions/49411796/how-do-i-detect-whether-i-am-on-server-on-client-in-next-js
-    if (typeof window === "undefined") {
+    if (colorTheme === "light") {
       return "light";
     }
 
-    if (colorTheme === "system") {
-      // https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
-      const isSystemDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      return isSystemDark ? "dark" : "light";
+    if (colorTheme === "dark") {
+      return "dark";
     }
 
-    // TODO
-    // - Feel like this could be a bit cleaner
-    return colorTheme === "dark" ? "dark" : "light";
+    // If unknown value, return no class
+    // - Helpful for debugging
+    return "";
   }, [colorTheme]);
 
   return {

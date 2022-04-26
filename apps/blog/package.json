@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@icon-park/react": "^1.3.5",
     "contentlayer": "^0.2.1",
     "localforage": "^1.10.0",
     "next": "12.0.8",
