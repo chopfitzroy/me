@@ -22,6 +22,9 @@ module.exports = {
             // Needs to convert to valid CSS
             // - https://github.com/tailwindlabs/tailwindcss-typography/issues/230
             fontFamily: `'Quattrocento', ${theme('fontFamily.sans').join(', ')}`,
+            'a': {
+              color: theme('colors.pink.500')
+            },
             'h1,h2,h3,h4': {
               fontFamily: `'Oswald', ${theme('fontFamily.sans').join(', ')}`
             },
@@ -30,6 +33,9 @@ module.exports = {
         dark: {
           css: {
             color: theme('colors.slate.200'),
+            'a': {
+              color: theme('colors.green.300')
+            },
             'h1,h2,h3,h4': {
               color: theme('colors.slate.200'),
             }

@@ -11,8 +11,17 @@ interface UseLightDarkToggle {
   toggleColorTheme: ToggleColorThemeSignature;
 }
 
-type GetColorThemeSignature = () => Promise<ColorTheme>;
-const getColorTheme: GetColorThemeSignature = async () => {
+type SetColorThemeToCacheSignature = (theme: ColorTheme) => Promise<void>;
+const setColorThemeToCache: SetColorThemeToCacheSignature = async (theme) => {
+  try {
+    await localforage.setItem<ColorTheme>("colorTheme", theme);
+  } catch (_: unknown) {
+    console.warn(`Error persisting 'colorTheme' to local storage.`);
+  }
+};
+
+type GetColorThemeFromCacheSignature = () => Promise<ColorTheme>;
+const getColorThemeFromCache: GetColorThemeFromCacheSignature = async () => {
   try {
     const theme = await localforage.getItem<ColorTheme>("colorTheme");
 
@@ -59,7 +68,14 @@ const useLightDarkToggle: UseLightDarkToggleSignature = () => {
 
   useEffect(() => {
     (async () => {
-      const theme = await getColorTheme();
+      // Persist to cache as side effect
+      await setColorThemeToCache(colorTheme);
+    })();
+  }, [colorTheme]);
+
+  useEffect(() => {
+    (async () => {
+      const theme = await getColorThemeFromCache();
       setColorTheme(theme);
     })();
   }, [setColorTheme]);
