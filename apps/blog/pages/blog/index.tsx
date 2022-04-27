@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { InferGetStaticPropsType } from "next";
 import { allBlogs } from "../../.contentlayer/generated";
 
@@ -11,7 +13,9 @@ const Blog: BlogSignature = ({ posts }) => {
       {posts.map((post) => (
         <div key={post.slug}>
           <h3 className="text-3xl font-bold underline">
-            <a href={`/posts/${post.slug}`}>{post.title}</a>
+            <Link href={`/posts/${post.slug}`}>
+              <a>{post.title}</a>
+            </Link>
           </h3>
           <p>{post.description}</p>
         </div>

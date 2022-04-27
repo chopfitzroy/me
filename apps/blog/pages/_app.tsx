@@ -1,4 +1,4 @@
-import { LightDarkToggle } from "../components/LightDarkToggle";
+import { NavigationBar } from "../components/NavigationBar";
 import { LightDarkWrapper } from "../components/LightDarkWrapper";
 import { PreferencesProvider } from "../context/Preferences/PreferencesContext";
 
@@ -11,7 +11,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <PreferencesProvider>
       <LightDarkWrapper>
-        <LightDarkToggle />
+        <NavigationBar />
         <Component {...pageProps} />
       </LightDarkWrapper>
     </PreferencesProvider>

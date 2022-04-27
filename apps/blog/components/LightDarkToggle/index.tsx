@@ -6,9 +6,9 @@ const LightDarkToggle: LightDarkToggleSignature = () => {
   const { colorTheme, toggleColorTheme } = useLightDarkToggle();
 
   return (
-    <button onClick={toggleColorTheme}>
-      {colorTheme === "dark" && <Sun />}
-      {colorTheme === "light" && <Moon />}
+    <button className="p-2 rounded bg-slate-200 dark:bg-slate-800" onClick={toggleColorTheme}>
+      {colorTheme === "dark" && <Sun className="text-slate-200" />}
+      {colorTheme === "light" && <Moon className="text-gray-700" />}
     </button>
   );
 };
