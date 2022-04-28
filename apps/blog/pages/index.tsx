@@ -27,6 +27,8 @@ const Main: MainSignature = ({ posts }) => {
             <h1 className="mb-6 text-5xl font-bold font-heading text-gray-700 dark:text-slate-200">
               Otis Sutton
             </h1>
+            {/* Technically it would probably be easier to make this page an `.mdx` file */}
+            {/* But something about that just feels wrong when most of the content is this one block */}
             <ReactMarkdown
               children={content}
               className="max-w-none prose dark:prose-dark"
@@ -43,7 +45,7 @@ const Main: MainSignature = ({ posts }) => {
         <div>
           <h2 className="mb-4 text-3xl font-bold font-heading text-gray-700 dark:text-slate-200">Latest Posts</h2>
           {posts.map((post) => (
-            <div key={post.slug} className="pb-2 mb-2 border-b">
+            <div key={post.slug} className="pb-2 mb-2 border-b border-slate-200 dark:border-slate-800">
               <p className="mb-2 font-bold font-body text-xl text-gray-700 dark:text-slate-200">
                 <Link href={`/posts/${post.slug}`}>
                   <a>{post.title}</a>
