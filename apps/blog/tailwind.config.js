@@ -19,6 +19,7 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
+            lineHeight: theme('lineHeight.loose'),
             // Needs to convert to valid CSS
             // - https://github.com/tailwindlabs/tailwindcss-typography/issues/230
             fontFamily: `'Quattrocento', ${theme('fontFamily.sans').join(', ')}`,
