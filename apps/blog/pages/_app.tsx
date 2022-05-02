@@ -1,4 +1,6 @@
+import { Footer } from "../components/Footer";
 import { NavigationBar } from "../components/NavigationBar";
+import { ContentWrapper } from "../components/ContentWrapper";
 import { LightDarkWrapper } from "../components/LightDarkWrapper";
 import { PreferencesProvider } from "../context/Preferences/PreferencesContext";
 
@@ -11,8 +13,11 @@ const App = ({ Component, pageProps }) => {
   return (
     <PreferencesProvider>
       <LightDarkWrapper>
-        <NavigationBar />
-        <Component {...pageProps} />
+        <ContentWrapper>
+          <NavigationBar />
+          <Component {...pageProps} />
+          <Footer />
+        </ContentWrapper>
       </LightDarkWrapper>
     </PreferencesProvider>
   );
