@@ -8,17 +8,29 @@ const Footer = () => {
       <div>
         <ul>
           <li>
-            <a className="font-body text-gray-700 dark:text-slate-200" href="#">
+            <a
+              className="font-body text-gray-700 dark:text-slate-200"
+              href="https://www.linkedin.com/in/otiswright/"
+              target="_blank"
+            >
               LinkedIn
             </a>
           </li>
           <li>
-            <a className="font-body text-gray-700 dark:text-slate-200" href="#">
+            <a
+              className="font-body text-gray-700 dark:text-slate-200"
+              href="https://twitter.com/ChopFitzroy"
+              target="_blank"
+            >
               Twitter
             </a>
           </li>
           <li>
-            <a className="font-body text-gray-700 dark:text-slate-200" href="#">
+            <a
+              className="font-body text-gray-700 dark:text-slate-200"
+              href="https://github.com/chopfitzroy"
+              target="_blank"
+            >
               Github
             </a>
           </li>
