@@ -57,6 +57,11 @@ const Footer = () => {
               Newsletter
             </a>
           </li>
+          <li>
+            <a className="font-body text-gray-700 dark:text-slate-200" href="#">
+              Archive
+            </a>
+          </li>
         </ul>
       </div>
     </div>

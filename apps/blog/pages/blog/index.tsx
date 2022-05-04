@@ -1,17 +1,19 @@
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
+import { useBlog } from './useBlog';
 import { InferGetStaticPropsType } from "next";
 import { allBlogs } from "../../.contentlayer/generated";
 
-type BlogProps = InferGetStaticPropsType<typeof getStaticProps>;
+export type BlogProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const content = `
 Hey there 👋 I've been writing on and off for a few years now. Most of what you will find here is strictly related to programming or team leadership.
 `;
 
 type BlogSignature = (props: BlogProps) => JSX.Element;
-const Blog: BlogSignature = ({ posts }) => {
+const Blog: BlogSignature = (props) => {
+  const { posts } = useBlog(props);
   return (
     <div className="w-full max-w-screen-md p-4">
       <h1 className="mb-6 text-5xl font-bold font-heading text-gray-700 dark:text-slate-200">
@@ -38,10 +40,7 @@ const Blog: BlogSignature = ({ posts }) => {
 };
 
 const getStaticProps = () => {
-  const posts = allBlogs.sort(
-    (a, b) => Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
-  );
-
+  const posts = allBlogs;
   return { props: { posts } };
 };
 
