@@ -53,12 +53,12 @@ const Footer = () => {
       <div>
         <ul>
           <li>
-            <a className="font-body text-gray-700 dark:text-slate-200" href="#">
+            <a className="font-body text-gray-700 dark:text-slate-200" href="https://buttondown.email/otis" target="_blank">
               Newsletter
             </a>
           </li>
           <li>
-            <a className="font-body text-gray-700 dark:text-slate-200" href="#">
+            <a className="font-body text-gray-700 dark:text-slate-200" href="https://buttondown.email/otis/archive" target="_blank">
               Archive
             </a>
           </li>
