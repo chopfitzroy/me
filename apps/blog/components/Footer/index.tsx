@@ -9,7 +9,7 @@ const Footer = () => {
         <ul>
           <li>
             <a
-              className="font-body text-gray-700 dark:text-slate-200"
+              className="font-body text-slate-700 dark:text-slate-200"
               href="https://www.linkedin.com/in/otiswright/"
               target="_blank"
             >
@@ -18,7 +18,7 @@ const Footer = () => {
           </li>
           <li>
             <a
-              className="font-body text-gray-700 dark:text-slate-200"
+              className="font-body text-slate-700 dark:text-slate-200"
               href="https://twitter.com/ChopFitzroy"
               target="_blank"
             >
@@ -27,7 +27,7 @@ const Footer = () => {
           </li>
           <li>
             <a
-              className="font-body text-gray-700 dark:text-slate-200"
+              className="font-body text-slate-700 dark:text-slate-200"
               href="https://github.com/chopfitzroy"
               target="_blank"
             >
@@ -39,12 +39,12 @@ const Footer = () => {
       <div>
         <ul>
           <li>
-            <a className="font-body text-gray-700 dark:text-slate-200" href="#">
+            <a className="font-body text-slate-700 dark:text-slate-200" href="#">
               Sitemap
             </a>
           </li>
           <li>
-            <a className="font-body text-gray-700 dark:text-slate-200" href="#">
+            <a className="font-body text-slate-700 dark:text-slate-200" href="#">
               RSS
             </a>
           </li>
@@ -53,12 +53,12 @@ const Footer = () => {
       <div>
         <ul>
           <li>
-            <a className="font-body text-gray-700 dark:text-slate-200" href="https://buttondown.email/otis" target="_blank">
+            <a className="font-body text-slate-700 dark:text-slate-200" href="https://buttondown.email/otis" target="_blank">
               Newsletter
             </a>
           </li>
           <li>
-            <a className="font-body text-gray-700 dark:text-slate-200" href="https://buttondown.email/otis/archive" target="_blank">
+            <a className="font-body text-slate-700 dark:text-slate-200" href="https://buttondown.email/otis/archive" target="_blank">
               Archive
             </a>
           </li>

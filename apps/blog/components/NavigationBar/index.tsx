@@ -6,7 +6,7 @@ type NavigationBarSignature = () => JSX.Element;
 const NavigationBar: NavigationBarSignature = () => {
   return (
       <nav className="flex justify-between w-full max-w-screen-md p-4">
-        <ul className="flex font-bold text-gray-700 dark:text-slate-200">
+        <ul className="flex font-bold text-slate-700 dark:text-slate-200">
           <li className="px-2 py-4">
             <Link href="/">
               <a>Home</a>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 
 import { InferGetStaticPropsType } from "next";
+import { PostList } from "../components/PostsList";
 import { allBlogs } from "../.contentlayer/generated";
 
 import Me from "../assets/images/me.jpg";
@@ -23,7 +24,7 @@ const Main: MainSignature = ({ posts }) => {
     <div className="w-full max-w-screen-md p-4">
       <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="col-span-3">
-          <h1 className="mb-6 text-5xl font-bold font-heading text-gray-700 dark:text-slate-200">
+          <h1 className="mb-6 text-5xl font-bold font-heading text-slate-700 dark:text-slate-200">
             Otis Sutton
           </h1>
           {/* Technically it would probably be easier to make this page an `.mdx` file */}
@@ -41,23 +42,7 @@ const Main: MainSignature = ({ posts }) => {
           </div>
         </div>
       </div>
-      <div>
-        {posts.map((post) => (
-          <div
-            key={post.slug}
-            className="pt-2 mt-2 border-t border-slate-200 dark:border-slate-800"
-          >
-            <p className="mb-2 font-bold font-heading text-xl text-gray-700 dark:text-slate-200">
-              <Link href={`/posts/${post.slug}`}>
-                <a>{post.title}</a>
-              </Link>
-            </p>
-            <p className="font-body text-gray-700 dark:text-slate-200">
-              {post.description}
-            </p>
-          </div>
-        ))}
-      </div>
+      <PostList posts={posts} />
     </div>
   );
 };
