@@ -1,39 +1,48 @@
 import { Feed } from "feed";
 
-// import { writeFileSync } from 'fs';
-import { allBlogs } from '../.contentlayer/generated';
+import { resolve } from 'path';
+import { writeFileSync } from 'fs';
+import { allBlogs } from '../.contentlayer/generated/index.mjs';
 
 const generate = async () => {
+    const output =  resolve(process.cwd() + '/public/');
     const feed = new Feed({
         title: "Otis Sutton",
         description: "Otis Sutton blog RSS feed.",
-        id: "https://otis.engineer",
-        link: "https://otis.engineer",
+        id: "https://otis.engineer/",
+        link: "https://otis.engineer/",
         language: "en",
         copyright: "All rights reserved 2022, Otis Sutton",
         feedLinks: {
-            json: "https://otis.engineer/json",
-            atom: "https://otis.engineer/atom"
+            json: "https://otis.engineer/feed.xml",
+            atom: "https://otis.engineer/atom.xml"
         },
         author: {
             name: "Otis Sutton",
             email: "hello@otis.engineer",
-            link: "https://otis.engineer"
+            link: "https://otis.engineer/"
         }
     });
 
-    allBlogs.map((post) => {
-        feed.item({
-            title: post.title,
-            url: `https://otis.engineer/posts/${post.slug}`,
-            date: post.publishedAt,
-            description: post.description
-        });
-    });
+    const formatted = allBlogs.map(({ slug, title, description, publishedAt }) => {
+        const link = `https://otis.engineer/posts/${slug}`;
+        return {
+            id: link,
+            link,
+            // TODO fix the way this works
+            date: new Date(2013, 6, 14),
+            // date: publishedAt,
+            title: title,
+            description: description,
+        }
+    })
 
-    console.log(feed.rss2());
-    console.log(feed.atom1());
-    //   writeFileSync('./public/feed.xml', feed.xml({ indent: true }));
+    formatted.forEach(feed.addItem);
+
+    // - https://validator.w3.org/feed/docs/rss2.html
+    writeFileSync(resolve(output, 'feed.xml'), feed.rss2());
+    // - https://validator.w3.org/feed/docs/atom.html
+    writeFileSync(resolve(output, 'atom.xml'), feed.atom1());
 }
 
 generate();
