@@ -4,7 +4,18 @@ import readingTime from "reading-time";
 import remarkShikiTwoslash from "remark-shiki-twoslash";
 
 import { nodeTypes } from "@mdx-js/mdx";
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import {
+  makeSource,
+  defineDocumentType,
+  ComputedFields,
+} from "contentlayer/source-files";
+
+const computedFields: ComputedFields = {
+  slug: {
+    type: "string",
+    resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx/, ""),
+  },
+};
 
 // NOTE: Mostly copied from:
 // - https://betterprogramming.pub/building-better-next-js-static-sites-with-mdx-and-contentlayer-9a06ca84e7f7
@@ -20,18 +31,25 @@ export const Blog = defineDocumentType(() => ({
     publishedAt: { type: "string", required: true },
   },
   computedFields: {
+    ...computedFields,
     readingTime: { type: "json", resolve: (doc) => readingTime(doc.body.raw) },
-    slug: {
-      type: "string",
-      resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx/, ""),
-    },
   },
+}));
+
+const Pages = defineDocumentType(() => ({
+  name: "Pages",
+  filePathPattern: "pages/*.mdx",
+  contentType: "mdx",
+  fields: {
+    title: { type: "string", required: true },
+  },
+  computedFields,
 }));
 
 export default makeSource({
   disableImportAliasWarning: true,
   contentDirPath: "data",
-  documentTypes: [Blog],
+  documentTypes: [Blog, Pages],
   mdx: {
     remarkPlugins: [
       remarkGfm,

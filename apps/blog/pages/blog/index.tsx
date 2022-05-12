@@ -1,15 +1,9 @@
-import ReactMarkdown from "react-markdown";
-
 import { useBlog } from "./useBlog";
 import { InferGetStaticPropsType } from "next";
 import { PostList } from "../../components/PostsList";
 import { allBlogs } from "../../.contentlayer/generated";
 
 export type BlogProps = InferGetStaticPropsType<typeof getStaticProps>;
-
-const content = `
-Hey there 👋 I've been writing on and off for a few years now. Most of what you will find here is strictly related to programming or team leadership.
-`;
 
 type BlogSignature = (props: BlogProps) => JSX.Element;
 const Blog: BlogSignature = (props) => {
@@ -19,10 +13,11 @@ const Blog: BlogSignature = (props) => {
       <h1 className="mb-6 text-5xl font-bold font-heading text-slate-700 dark:text-slate-200">
         Blog
       </h1>
-      <ReactMarkdown
-        children={content}
-        className="max-w-none mb-4 prose dark:prose-dark"
-      ></ReactMarkdown>
+      <p className="mb-4 font-body text-slate-700 dark:text-slate-200">
+        Hey there 👋 I've been writing on and off for a few years now. Most of
+        what you will find here is strictly related to programming or team
+        leadership.
+      </p>
       <div className="mb-8">
         <input
           type="text"
