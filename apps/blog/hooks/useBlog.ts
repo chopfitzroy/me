@@ -1,5 +1,5 @@
-import { BlogProps } from "./";
-import { Blog } from "../../.contentlayer/generated";
+import { BlogProps } from "../pages/blog";
+import { Blog } from "../.contentlayer/generated";
 import { useMemo, useState, useCallback, ChangeEvent } from "react";
 
 type SearchHandlerSignature = (event: ChangeEvent<HTMLInputElement>) => void;

@@ -11,7 +11,7 @@ const NotFound: NotFoundSignature = () => {
         Oops! Something went wrong.
       </h1>
       <p className="leading-loose font-body text-slate-700 dark:text-slate-200">
-        We can't find the page you are looking for, if you got here by accident
+        We can&apos;t find the page you are looking for, if you got here by accident
         please click{" "}
         <Link href="/">
           <a className="text-pink-500 dark:text-green-300">here</a>
@@ -21,7 +21,7 @@ const NotFound: NotFoundSignature = () => {
       <p className="mb-4 leading-loose font-body text-slate-700 dark:text-slate-200">
         If you did mean to get here, please enjoy this picture of a pug.
       </p>
-      <Image src={Pug} layout="responsive" />
+      <Image src={Pug} layout="responsive" alt="Pug in a blanket" />
     </div>
   );
 };

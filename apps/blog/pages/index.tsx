@@ -27,7 +27,7 @@ const Main: MainSignature = ({ posts, content }) => {
         <div>
           <div className="rounded-full p-1 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 dark:from-green-300 dark:via-blue-500 dark:to-purple-600">
             <div className="rounded-full overflow-hidden">
-              <Image src={Me} layout="responsive" />
+              <Image src={Me} layout="responsive" alt="Otis Sutton" />
             </div>
           </div>
         </div>

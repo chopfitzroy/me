@@ -1,4 +1,4 @@
-import { useBlog } from "./useBlog";
+import { useBlog } from "../../hooks/useBlog";
 import { InferGetStaticPropsType } from "next";
 import { PostList } from "../../components/PostsList";
 import { allBlogs } from "../../.contentlayer/generated";
@@ -14,8 +14,8 @@ const Blog: BlogSignature = (props) => {
         Blog
       </h1>
       <p className="mb-4 font-body text-slate-700 dark:text-slate-200">
-        Hey there 👋 I've been writing on and off for a few years now. Most of
-        what you will find here is strictly related to programming or team
+        Hey there 👋 I&apos;ve been writing on and off for a few years now. Most
+        of what you will find here is strictly related to programming or team
         leadership.
       </p>
       <div className="mb-8">
