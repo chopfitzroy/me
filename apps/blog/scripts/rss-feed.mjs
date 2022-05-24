@@ -1,6 +1,6 @@
 import { Feed } from "feed";
-
 import { resolve } from 'path';
+import { parse } from 'date-fns';
 import { writeFileSync } from 'fs';
 import { allBlogs } from '../.contentlayer/generated/index.mjs';
 
@@ -29,9 +29,7 @@ const generate = async () => {
         return {
             id: link,
             link,
-            // TODO fix the way this works
-            date: new Date(2013, 6, 14),
-            // date: publishedAt,
+            date: parse(publishedAt, 'MMMM d, yyyy', new Date()),
             title: title,
             description: description,
         }
