@@ -3,18 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "env-cmd -f ./.env.development.local next dev",
     "lint": "next lint",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "rss-feed": "node ./scripts/rss-feed.mjs",
-    "postbuild": "next-sitemap && npm run rss-feed"
+    "postbuild": "next-sitemap && npm run rss-feed && next export"
   },
   "dependencies": {
     "@icon-park/react": "^1.3.5",
+    "@octokit/core": "^3.6.0",
     "contentlayer": "^0.2.4",
     "date-fns": "^2.28.0",
-    "got": "^12.0.4",
     "localforage": "^1.10.0",
     "next": "^12.1.6",
     "next-contentlayer": "^0.2.4",
@@ -31,6 +31,7 @@
     "@types/react": "17.0.37",
     "autoprefixer": "^10.4.4",
     "config": "*",
+    "env-cmd": "^10.1.0",
     "eslint": "7.32.0",
     "feed": "^4.2.2",
     "next-compose-plugins": "^2.2.1",

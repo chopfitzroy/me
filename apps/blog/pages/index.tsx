@@ -1,8 +1,8 @@
-import got from "got";
 import Image from "next/image";
 
 import { MDXRemote } from "next-mdx-remote";
 import { InferGetStaticPropsType } from "next";
+import { Octokit } from "@octokit/core";
 import { PostList } from "../components/PostsList";
 import { serialize } from "next-mdx-remote/serialize";
 import { allBlogs } from "../.contentlayer/generated";
@@ -40,15 +40,24 @@ const Main: MainSignature = ({ posts, content }) => {
 const getStaticProps = async () => {
   // Fetch profile directly from GitHub
   // - https://github.com/chopfitzroy/chopfitzroy
-  const { content: data } = await got
-    .get(
-      "https://api.github.com/repos/chopfitzroy/chopfitzroy/contents/README.md"
-    )
-    .json();
+  const octokit = new Octokit({
+    auth: process.env.GITHUB_TOKEN,
+  });
+
+  // NOTE have to use `any` here to force `.content` to be allowed below
+  // - Would love to figure out how to type this correctly
+  const { data } = await octokit.request<any>(
+    "GET /repos/{owner}/{repo}/contents/{path}",
+    {
+      owner: "chopfitzroy",
+      repo: "chopfitzroy",
+      path: "README.md",
+    }
+  );
 
   // Convert to RAW markdown
   // - https://futurestud.io/tutorials/how-to-base64-encode-decode-a-value-in-node-js
-  const raw = Buffer.from(data, "base64");
+  const raw = Buffer.from(data.content, "base64");
   const decoded = raw.toString("utf8");
   const content = await serialize(decoded);
 
