@@ -1,6 +1,7 @@
 import { InferGetStaticPropsType } from "next";
 import { allPages } from "../../.contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
+import { Heading } from "../../components/Heading";
 
 export type UsesProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -10,9 +11,7 @@ const Uses: UsesSignature = ({ body: { code } }) => {
 
   return (
     <div className="w-full max-w-screen-md p-4">
-      <h1 className="mb-6 text-5xl font-bold font-heading text-slate-700 dark:text-slate-200">
-        Uses
-      </h1>
+      <Heading>Uses</Heading>
       <div className="max-w-none mb-4 prose dark:prose-dark">
         <Component />
       </div>

@@ -31,15 +31,11 @@ module.exports = {
             },
           }
         },
-        dark: {
+        invert: {
           css: {
-            color: theme('colors.slate.200'),
             'a': {
               color: theme('colors.green.300')
             },
-            'h1,h2,h3,h4': {
-              color: theme('colors.slate.200'),
-            }
           }
         }
       })

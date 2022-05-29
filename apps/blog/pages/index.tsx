@@ -8,6 +8,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import { allBlogs } from "../.contentlayer/generated";
 
 import Me from "../assets/images/me.jpg";
+import { Heading } from "../components/Heading";
 
 type MainProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -17,9 +18,7 @@ const Main: MainSignature = ({ posts, content }) => {
     <div className="w-full max-w-screen-md p-4">
       <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="col-span-3">
-          <h1 className="mb-6 text-5xl font-bold font-heading text-slate-700 dark:text-slate-200">
-            Otis Sutton
-          </h1>
+          <Heading>Otis Sutton</Heading>
           <div className="max-w-none prose dark:prose-dark">
             <MDXRemote {...content} />
           </div>

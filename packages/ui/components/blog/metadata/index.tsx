@@ -12,7 +12,6 @@ interface BlogMetadataProps {
 type BlogMetadataSignature = (props: BlogMetadataProps) => JSX.Element;
 const BlogMetadata: BlogMetadataSignature = ({
   title,
-  description,
   publishedAt,
   readingTime,
   className = "",
@@ -22,12 +21,11 @@ const BlogMetadata: BlogMetadataSignature = ({
   return (
     <div className={className}>
       <div>
-      <h1 className="inline-block bg-clip-text bg-gradient-to-r text-transparent text-5xl leading-loose font-heading font-bold from-pink-500 via-red-500 to-yellow-500 dark:from-green-300 dark:via-blue-500 dark:to-purple-600">
-        {animatedTitle}
-      </h1>
+        <h1 className="inline-block bg-clip-text bg-gradient-to-r text-transparent text-5xl leading-loose font-heading font-bold from-pink-500 via-red-500 to-yellow-500 dark:from-green-300 dark:via-blue-500 dark:to-purple-600">
+          {animatedTitle}
+        </h1>
       </div>
-      <h2 className="font-body dark:text-slate-200">{description}</h2>
-      <p className="font-body dark:text-slate-200">{publishedAt}</p>
+      <p className="font-body text-slate-700 dark:text-slate-200">{publishedAt}</p>
     </div>
   );
 };
