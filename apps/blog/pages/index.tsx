@@ -19,7 +19,7 @@ const Main: MainSignature = ({ posts, content }) => {
       <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="col-span-3">
           <Heading>Otis Sutton</Heading>
-          <div className="max-w-none prose dark:prose-dark">
+          <div className="max-w-none prose dark:prose-invert">
             <MDXRemote {...content} />
           </div>
         </div>

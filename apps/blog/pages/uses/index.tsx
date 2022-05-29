@@ -12,7 +12,7 @@ const Uses: UsesSignature = ({ body: { code } }) => {
   return (
     <div className="w-full max-w-screen-md p-4">
       <Heading>Uses</Heading>
-      <div className="max-w-none mb-4 prose dark:prose-dark">
+      <div className="max-w-none mb-4 prose dark:prose-invert">
         <Component />
       </div>
     </div>
