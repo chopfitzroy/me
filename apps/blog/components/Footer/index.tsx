@@ -44,7 +44,8 @@ const Footer = () => {
           <li>
             <a
               className="font-body text-slate-700 dark:text-slate-200"
-              href="#"
+              href="/sitemap.xml"
+              target="_blank"
               rel="noreferrer"
             >
               Sitemap
@@ -53,7 +54,18 @@ const Footer = () => {
           <li>
             <a
               className="font-body text-slate-700 dark:text-slate-200"
-              href="#"
+              href="/atom.xml"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Atom
+            </a>
+          </li>
+          <li>
+            <a
+              className="font-body text-slate-700 dark:text-slate-200"
+              href="/feed.xml"
+              target="_blank"
               rel="noreferrer"
             >
               RSS
