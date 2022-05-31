@@ -10,7 +10,7 @@ type BlogSignature = (props: BlogProps) => JSX.Element;
 const Blog: BlogSignature = (props) => {
   const { posts, searchHandler } = useBlog(props);
   return (
-    <div className="w-full max-w-screen-md p-4">
+    <div className="w-full max-w-screen-md p-4 pt-0">
       <Heading>Blog</Heading>
       <p className="mb-4 font-body text-slate-700 dark:text-slate-200">
         Hey there 👋 I&apos;ve been writing on and off for a few years now. Most

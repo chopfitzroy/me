@@ -15,16 +15,16 @@ type MainProps = InferGetStaticPropsType<typeof getStaticProps>;
 type MainSignature = (props: MainProps) => JSX.Element;
 const Main: MainSignature = ({ posts, content }) => {
   return (
-    <div className="w-full max-w-screen-md p-4">
+    <div className="w-full max-w-screen-md p-4 pt-0">
       <div className="grid grid-cols-4 gap-4 mb-6">
-        <div className="col-span-3">
+        <div className="col-span-4 md:col-span-3">
           <Heading>Otis Sutton</Heading>
           <div className="max-w-none prose dark:prose-invert">
             <MDXRemote {...content} />
           </div>
         </div>
-        <div>
-          <div className="rounded-full p-1 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 dark:from-green-300 dark:via-blue-500 dark:to-purple-600">
+        <div className="col-span-4 md:col-span-1">
+          <div className="w-32 max-w-full p-1 mx-auto mt-2 md:mt-10 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 dark:from-green-300 dark:via-blue-500 dark:to-purple-600">
             <div className="rounded-full overflow-hidden">
               <Image src={Me} layout="responsive" alt="Otis Sutton" />
             </div>

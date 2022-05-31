@@ -7,7 +7,7 @@ import { Heading } from "../../components/Heading";
 type NotFoundSignature = () => JSX.Element;
 const NotFound: NotFoundSignature = () => {
   return (
-    <div className="w-full max-w-screen-md p-4">
+    <div className="w-full max-w-screen-md p-4 pt-0">
       <Heading>Oops! Something went wrong.</Heading>
       <p className="leading-loose font-body text-slate-700 dark:text-slate-200">
         We can&apos;t find the page you are looking for, if you got here by accident

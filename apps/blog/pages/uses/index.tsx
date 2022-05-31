@@ -10,7 +10,7 @@ const Uses: UsesSignature = ({ body: { code } }) => {
   const Component = useMDXComponent(code);
 
   return (
-    <div className="w-full max-w-screen-md p-4">
+    <div className="w-full max-w-screen-md p-4 pt-0">
       <Heading>Uses</Heading>
       <div className="max-w-none mb-4 prose dark:prose-invert">
         <Component />

@@ -8,7 +8,7 @@ interface BlogLayoutProps extends Blog {
 type BlogLayoutSignature = (props: BlogLayoutProps) => JSX.Element;
 const BlogLayout: BlogLayoutSignature = ({ children, ...props }) => {
   return (
-    <article className="w-full max-w-screen-md p-4">
+    <article className="w-full max-w-screen-md p-4 pt-0">
       <BlogMetadata {...props} className="mb-4" />
       <section className="max-w-none prose dark:prose-invert">
         {children}
