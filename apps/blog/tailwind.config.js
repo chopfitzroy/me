@@ -14,6 +14,9 @@ module.exports = {
         body: ['Quattrocento', ...font.sans],
         heading: ['Oswald', ...font.sans],
       },
+      transitionProperty: {
+        'max-height': 'max-height'
+      },
       // NOTE: Tailwind prose plugin ✨
       // https://tailwindcss.com/docs/typography-plugin
       typography: (theme) => ({
