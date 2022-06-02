@@ -4,6 +4,7 @@ import { ContentWrapper } from "../components/ContentWrapper";
 import { LightDarkWrapper } from "../components/LightDarkWrapper";
 import { PreferencesProvider } from "../context/Preferences/PreferencesContext";
 
+import "../assets/styles/shiki-twoslash.css"
 import "../assets/styles/main.css";
 
 // TODO

@@ -13,15 +13,24 @@ const useBlog: UseBlogSignature = (props) => {
   const [searchValue, setSearchValue] = useState<string>("");
 
   const posts = useMemo<Blog[]>(() => {
-    const filtered = props.posts.filter(({ title, description }) => {
-      return title.includes(searchValue) || description.includes(searchValue);
-    });
+    const filtered = props.posts.filter(({ draft }) => !draft);
 
     const sorted = filtered.sort(
       (a, b) =>
         Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
     );
-    return sorted;
+
+    const searched = sorted.filter(({ title, description }) => {
+      const normalizedTitle = title.toLowerCase();
+      const normalizedDescription = description.toLowerCase();
+      const normalizedSearchValue = searchValue.toLowerCase();
+      return (
+        normalizedTitle.includes(normalizedSearchValue) ||
+        normalizedDescription.includes(normalizedSearchValue)
+      );
+    });
+
+    return searched;
   }, [props, searchValue]);
 
   const searchHandler = useCallback<SearchHandlerSignature>((event) => {

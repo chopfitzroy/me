@@ -26,6 +26,7 @@ export const Blog = defineDocumentType(() => ({
   contentType: "mdx",
   filePathPattern: "posts/*.mdx",
   fields: {
+    draft: { type: "boolean", required: false },
     title: { type: "string", required: true },
     description: { type: "string", required: true },
     publishedAt: { type: "string", required: true },

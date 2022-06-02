@@ -2,7 +2,6 @@ import Link from "next/link";
 import { FC } from "react";
 
 import { HamburgerButton } from "@icon-park/react";
-
 import { LightDarkToggle } from "../LightDarkToggle";
 import { useNavigationBar } from "./useNavigationBar";
 
