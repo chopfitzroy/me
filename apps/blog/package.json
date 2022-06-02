@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "rss-feed": "node ./scripts/rss-feed.mjs",
-    "postbuild": "next-sitemap && npm run rss-feed && next export"
+    "postbuild": "npm run rss-feed && next-sitemap && next export"
   },
   "dependencies": {
     "@icon-park/react": "^1.3.5",

@@ -9,11 +9,13 @@ import { allBlogs } from "../.contentlayer/generated";
 
 import Me from "../assets/images/me.jpg";
 import { Heading } from "../components/Heading";
+import { useMain } from "../hooks/useMain";
 
-type MainProps = InferGetStaticPropsType<typeof getStaticProps>;
+export type MainProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 type MainSignature = (props: MainProps) => JSX.Element;
-const Main: MainSignature = ({ posts, content }) => {
+const Main: MainSignature = (props) => {
+  const { posts, content } = useMain(props);
   return (
     <div className="w-full max-w-screen-md p-4 pt-0">
       <div className="grid grid-cols-4 gap-4 mb-6">
@@ -60,12 +62,7 @@ const getStaticProps = async () => {
   const decoded = raw.toString("utf8");
   const content = await serialize(decoded);
 
-  const posts = allBlogs
-    .sort(
-      (a, b) =>
-        Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
-    )
-    .slice(0, 5);
+  const posts = allBlogs;
 
   return { props: { posts, content } };
 };
