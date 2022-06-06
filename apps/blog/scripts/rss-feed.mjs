@@ -24,7 +24,9 @@ const generate = async () => {
         }
     });
 
-    const formatted = allBlogs.map(({ slug, title, description, publishedAt }) => {
+    const filtered = allBlogs.filter(({ draft }) => !draft);
+
+    const formatted = filtered.map(({ slug, title, description, publishedAt }) => {
         const link = `https://otis.engineer/posts/${slug}`;
         return {
             id: link,
