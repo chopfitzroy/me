@@ -1,7 +1,3 @@
-/* Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Quattrocento:wght@400;700&display=swap");
-
-/* https://tailwindcss.com/docs/guides/nextjs */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
