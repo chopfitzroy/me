@@ -1,3 +1,6 @@
+// @NOTE
+// - Font import MUST BE at the top of the document
+// - https://www.w3schools.com/cssref/pr_import_rule.asp
 import "../assets/styles/google-font-family.css"
 import "../assets/styles/shiki-twoslash.css"
 import "../assets/styles/main.css";
