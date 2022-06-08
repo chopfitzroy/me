@@ -1,12 +1,12 @@
-import { InferGetStaticPropsType } from "next";
-import { allPages } from "../../.contentlayer/generated";
-import { useMDXComponent } from "next-contentlayer/hooks";
+import { FC } from "react";
+import { GetStaticProps } from "next";
 import { Heading } from "../../components/Heading";
+import { useMDXComponent } from "next-contentlayer/hooks";
+import { allPages, Pages } from "../../.contentlayer/generated";
 
-export type UsesProps = InferGetStaticPropsType<typeof getStaticProps>;
+interface UsesProps extends Pages {};
 
-type UsesSignature = (props: UsesProps) => JSX.Element;
-const Uses: UsesSignature = ({ body: { code } }) => {
+const Uses: FC<UsesProps> = ({ body: { code } }) => {
   const Component = useMDXComponent(code);
 
   return (
@@ -19,7 +19,7 @@ const Uses: UsesSignature = ({ body: { code } }) => {
   );
 };
 
-const getStaticProps = () => {
+const getStaticProps: GetStaticProps<UsesProps> = () => {
   const uses = allPages.find((page) => page.slug === "uses");
 
   return { props: uses };

@@ -1,7 +1,6 @@
-import { PropsWithChildren } from 'react';
+import { FC } from 'react';
 
-type ContentWrapperSignature = (props: PropsWithChildren<{}>) => JSX.Element;
-const ContentWrapper: ContentWrapperSignature = ({ children }) => {
+const ContentWrapper: FC = ({ children }) => {
   return (
       <div className="flex flex-col justify-start items-center min-h-screen bg-slate-100 dark:bg-slate-900">
         {children}

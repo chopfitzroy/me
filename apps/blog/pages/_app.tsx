@@ -6,11 +6,10 @@ import { PreferencesProvider } from "../context/Preferences/PreferencesContext";
 
 import "../assets/styles/shiki-twoslash.css"
 import "../assets/styles/main.css";
+import { AppProps } from "next/app";
+import { FC } from "react";
 
-// TODO
-// - Type this entire file properly
-
-const App = ({ Component, pageProps }) => {
+const App: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <PreferencesProvider>
       <LightDarkWrapper>

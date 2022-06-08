@@ -1,13 +1,15 @@
+import { FC } from "react";
+import { GetStaticProps } from "next";
 import { useBlog } from "../../hooks/useBlog";
-import { InferGetStaticPropsType } from "next";
-import { PostList } from "../../components/PostsList";
-import { allBlogs } from "../../.contentlayer/generated";
 import { Heading } from "../../components/Heading";
+import { PostList } from "../../components/PostsList";
+import { allBlogs, Blog } from "../../.contentlayer/generated";
 
-export type BlogProps = InferGetStaticPropsType<typeof getStaticProps>;
+export interface BlogProps {
+  posts: Blog[];
+}
 
-type BlogSignature = (props: BlogProps) => JSX.Element;
-const Blog: BlogSignature = (props) => {
+const Blog: FC<BlogProps> = (props) => {
   const { posts, searchHandler } = useBlog(props);
   return (
     <div className="w-full max-w-screen-md p-4 pt-0">
@@ -31,7 +33,7 @@ const Blog: BlogSignature = (props) => {
   );
 };
 
-const getStaticProps = () => {
+const getStaticProps: GetStaticProps<BlogProps> = () => {
   const posts = allBlogs;
   return { props: { posts } };
 };

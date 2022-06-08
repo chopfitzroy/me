@@ -1,20 +1,24 @@
 import Image from "next/image";
+import Me from "../assets/images/me.jpg";
 
-import { MDXRemote } from "next-mdx-remote";
-import { InferGetStaticPropsType } from "next";
+import { FC } from "react";
+import { GetStaticProps } from "next";
 import { Octokit } from "@octokit/core";
+import { useMain } from "../hooks/useMain";
+import { Heading } from "../components/Heading";
 import { PostList } from "../components/PostsList";
 import { serialize } from "next-mdx-remote/serialize";
-import { allBlogs } from "../.contentlayer/generated";
+import { allBlogs, Blog } from "../.contentlayer/generated";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 
-import Me from "../assets/images/me.jpg";
-import { Heading } from "../components/Heading";
-import { useMain } from "../hooks/useMain";
 
-export type MainProps = InferGetStaticPropsType<typeof getStaticProps>;
+export interface MainProps {
+  posts: Blog[];
+  content: MDXRemoteSerializeResult<Record<string, unknown>>
+}
 
-type MainSignature = (props: MainProps) => JSX.Element;
-const Main: MainSignature = (props) => {
+// type MainSignature = (props: MainProps) => JSX.Element;
+const Main: FC<MainProps> = (props) => {
   const { posts, content } = useMain(props);
   return (
     <div className="w-full max-w-screen-md p-4 pt-0">
@@ -38,7 +42,7 @@ const Main: MainSignature = (props) => {
   );
 };
 
-const getStaticProps = async () => {
+const getStaticProps: GetStaticProps<MainProps> = async () => {
   // Fetch profile directly from GitHub
   // - https://github.com/chopfitzroy/chopfitzroy
   const octokit = new Octokit({

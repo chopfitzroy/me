@@ -1,8 +1,8 @@
+import { FC } from "react";
 import { Sun, Moon } from "@icon-park/react";
 import { useLightDarkToggle } from "./useLightDarkToggle";
 
-type LightDarkToggleSignature = () => JSX.Element;
-const LightDarkToggle: LightDarkToggleSignature = () => {
+const LightDarkToggle: FC = () => {
   const { colorTheme, toggleColorTheme } = useLightDarkToggle();
 
   return (

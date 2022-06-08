@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-
 import Pug from '../../assets/images/pug.jpg';
+
+import { FC } from "react";
 import { Heading } from "../../components/Heading";
 
-type NotFoundSignature = () => JSX.Element;
-const NotFound: NotFoundSignature = () => {
+const NotFound: FC = () => {
   return (
     <div className="w-full max-w-screen-md p-4 pt-0">
       <Heading>Oops! Something went wrong.</Heading>

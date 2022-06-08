@@ -1,8 +1,7 @@
-import { PropsWithChildren } from "react";
+import { FC } from "react";
 import { useLightDarkWrapper } from "./useLightDarkWrapper";
 
-type LightDarkWrapperSignature = (props: PropsWithChildren<{}>) => JSX.Element;
-const LightDarkWrapper: LightDarkWrapperSignature = ({ children }) => {
+const LightDarkWrapper: FC = ({ children }) => {
   const { className } = useLightDarkWrapper();
   return <div className={className}>{children}</div>;
 };

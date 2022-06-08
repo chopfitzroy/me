@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import { FC } from "react";
 import { Blog } from "../../.contentlayer/generated";
 
 interface PostListProps {
@@ -6,8 +8,7 @@ interface PostListProps {
   className?: string;
 }
 
-type PostListSignature = (props: PostListProps) => JSX.Element;
-const PostList: PostListSignature = ({ posts, className = "" }) => (
+const PostList: FC<PostListProps> = ({ posts, className = "" }) => (
   <div className={className}>
     {posts.map((post) => (
       <div

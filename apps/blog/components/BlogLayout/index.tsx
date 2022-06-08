@@ -1,12 +1,10 @@
+import { FC } from "react";
 import { BlogMetadata } from "ui";
 import type { Blog } from "../../.contentlayer/generated";
 
-interface BlogLayoutProps extends Blog {
-  children: JSX.Element;
-}
+interface BlogLayoutProps extends Blog {}
 
-type BlogLayoutSignature = (props: BlogLayoutProps) => JSX.Element;
-const BlogLayout: BlogLayoutSignature = ({ children, ...props }) => {
+const BlogLayout: FC<BlogLayoutProps> = ({ children, ...props }) => {
   return (
     <article className="w-full max-w-screen-md p-4 pt-0">
       <BlogMetadata {...props} className="mb-4" />
