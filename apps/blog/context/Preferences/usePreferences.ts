@@ -1,10 +1,13 @@
 import { useContext } from "react";
-import { PreferencesContext } from "./PreferencesContext";
+import {
+  PreferencesContext,
+  PreferencesContextProps,
+} from "./PreferencesContext";
 
-// TODO
-// - Type this entire file properly
+interface UsePreferences extends PreferencesContextProps {}
 
-const usePreferences = () => {
+type UsePreferencesSigntare = () => UsePreferences;
+const usePreferences: UsePreferencesSigntare = () => {
   const context = useContext(PreferencesContext);
   if (context === undefined) {
     throw new Error(

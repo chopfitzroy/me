@@ -60,9 +60,10 @@ const useLightDarkToggle: UseLightDarkToggleSignature = () => {
         return "light";
       }
 
-      // If unknown value, don't toggle
-      // - Helpful for debugging
-      return "";
+      console.warn(
+        `'toggleColorTheme' recieved an invalid value '${current}' please used a valid value.`
+      );
+      return "light";
     });
   }, [setColorTheme]);
 

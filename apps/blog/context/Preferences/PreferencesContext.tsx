@@ -1,12 +1,16 @@
-import { useState, createContext } from "react";
+import { useState, createContext, SetStateAction, Dispatch, FC } from "react";
 
 export type ColorTheme = "dark" | "light";
+export interface PreferencesContextProps {
+  colorTheme: ColorTheme;
+  setColorTheme: Dispatch<SetStateAction<ColorTheme>>;
+}
 
-// TODO
-// - Type this entire file properly
-const PreferencesContext = createContext(undefined);
+const PreferencesContext = createContext<undefined | PreferencesContextProps>(
+  undefined
+);
 
-const PreferencesProvider = ({ children }) => {
+const PreferencesProvider: FC = ({ children }) => {
   const [colorTheme, setColorTheme] = useState<ColorTheme>("light");
   const value = { colorTheme, setColorTheme };
   return (
