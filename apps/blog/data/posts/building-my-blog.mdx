@@ -13,8 +13,9 @@ What was the main difference this time? I had a clear vision of what I wanted. I
 So this time I outlined what I wanted to achieve _long_ before I wrote any code. Here is a list of things I knew I wanted.
 
 - Something that I had built from scratch and could extend whenever and however I wanted.
-- Something fast with good SEO preferably a static site generator if possible.
 - Something that supported `.mdx` files which are my favourite way of authoring content.
+- Something fast with good SEO preferably a static site generator if possible.
+- Something that considers the reading experience a top priority.
 - First class TypeScript support in terms of code snippets.
 - A workflow that allowed my partner to proof read my posts and provide feedback before publishing.
 
@@ -30,11 +31,15 @@ Unfortunately I also wanted to use [Shiki Twoslash]() which I will discuss more 
 
 Like most people I have heard of and even used [Vercel]() so I was familiar enough with what [Next.js]() was but have never been lucky enough to work with it professionally, spoiler alert it's amazing! The first thing I did was setup `.mdx` file support so I could author blog posts using this format. However it pretty quickly became apparent that the [suggested way](https://nextjs.org/docs/advanced-features/using-mdx) of setting this up while adequate created a somewhat awkward publishing flow.
 
-Excited by this new tool and enjoying the process so far I set out to investigate how other developers were solving this problem, and boy oh boy was it my lucky day when I stumbled across [Lee Robinson's own blog](https://leerob.io/) which is also powered by [Next.js]() but uses a wonderful tool known as [contentlayer](https://www.contentlayer.dev/) to manage content authoring. I cannot **overstate** just how much this tool changes the game! It makes authoring content in [Next.js]() applications an absolute pleasure!
+Excited by this new tool and enjoying the process so far I set out to investigate how other developers were solving this problem, and boy oh boy was it my lucky day when I stumbled across [Lee Robinson's own blog](https://leerob.io/) which is also powered by [Next.js]() and uses [contentlayer](https://www.contentlayer.dev/) for content management. I cannot **overstate** just how much this tool changes the game! It makes authoring content in [Next.js]() applications an absolute pleasure!
 
 Setting this tools up is a tad involved and not really something I want to go into as part of this post, that being said the [source code](https://github.com/chopfitzroy/me) for this entire blog is available on Github so I encourage you to check it out if you are interested in trying these tools out for yourself.
 
+### Building with SEO in mind
 
+Usually when I build something for myself I consider SEO an absolute last priority. This isn't because I don't want people to find what I'm building but more that most of what I build is for myself and I'm not really bothered about whether or not other people can find it.
+
+This time I wanted to make sure I could be found, in fact I wanted to put as much effort into being found as possible. This time I've got something to say and I want to make sure people can hear it! 📣 
 
 ```ts twoslash
 interface IdLabel {

@@ -34,6 +34,11 @@ const getStaticProps: GetStaticProps<BlogProps, Params> = async ({
   params,
 }) => {
   const blog = allBlogs.find((blog) => blog.slug === params.slug);
+  if (blog === undefined) {
+    return {
+      notFound: true,
+    };
+  }
   return { props: { blog } };
 };
 
