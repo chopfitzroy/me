@@ -4,6 +4,9 @@
   "main": "./index.tsx",
   "types": "./index.tsx",
   "license": "MIT",
+  "dependencies": {
+    "windups": "^1.2.0"
+  },
   "devDependencies": {
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
@@ -12,9 +15,7 @@
     "typescript": "^4.5.3"
   },
   "peerDependencies": {
+    "next": "^12.1.6",
     "tailwindcss": "^3.0.23"
-  },
-  "dependencies": {
-    "windups": "^1.2.0"
   }
 }

@@ -1,11 +1,10 @@
 import { useWindupString } from "windups";
 
-interface BlogMetadataProps {
+export interface BlogMetadataProps {
   title: string;
   description: string;
   publishedAt: string;
-  // TODO type `readingTime` properly
-  readingTime: any;
+  readingTime: JSON;
   className?: string;
 }
 

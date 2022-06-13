@@ -5,6 +5,7 @@ import { allBlogs } from "../../.contentlayer/generated";
 import { BlogLayout } from "../../components/BlogLayout";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import type { Blog } from "../../.contentlayer/generated";
+import { authoringComponents } from "../../utilities/authoring";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -18,7 +19,7 @@ const Blog: FC<BlogProps> = ({ blog }) => {
   const Component = useMDXComponent(blog.body.code);
   return (
     <BlogLayout {...blog}>
-      <Component />
+      <Component components={authoringComponents} />
     </BlogLayout>
   );
 };
