@@ -8,7 +8,7 @@ For the longest time I've wanted to build a blog from scratch, something I could
 
 Well after years of failed attempts and moving onto the _next thing_ I am happy to say I have finally built a blog the way I want.
 
-What was the main difference this time? I had a clear vision of what I wanted. I have blogged before on platforms like [Medium](https://medium.com/@crashybang/about), as well as hosting an [11ty](https://www.11ty.dev/) starter kit. But none of that had really stuck... I wasn't invested in the outcome, I didn't know what I wanted to write about and I had no schedule or motivators to encourage me to keep going.
+What was the main difference this time? I had a clear vision of what I wanted. I have blogged before on platforms like [Medium](https://medium.com/@crashybang/about), as well as hosting an [11ty starter kit](https://chopfitzroy.dev/). But none of that had really stuck... I wasn't invested in the outcome, I didn't know what I wanted to write about and I had no schedule or motivators to encourage me to keep going.
 
 So this time I outlined what I wanted to achieve _long_ before I wrote any code. Here is a list of things I knew I wanted.
 
@@ -40,6 +40,24 @@ Setting this tools up is a tad involved and not really something I want to go in
 Usually when I build something for myself I consider SEO an absolute last priority. This isn't because I don't want people to find what I'm building but more that most of what I build is for myself and I'm not really bothered about whether or not other people can find it.
 
 This time I wanted to make sure I could be found, in fact I wanted to put as much effort into being found as possible. This time I've got something to say and I want to make sure people can hear it! 📣 
+
+For the most part this meant using things like [`next-sitemap`](https://github.com/iamvishnusankar/next-sitemap) and relying on a lot of the optimizations [Next.js]() already makes under the hood.
+
+As it stands I feel like I have set myself up for success in this area. There is still a ton of improvement that can be made here and I am looking forward to researching how to further fine tune my content.
+
+### Building something that makes reading enjoyable
+
+There is nothing I love more than a blog that is primarily focused around the content it delivers, minimal use of popups, carousels, etc... I spent a lot of time agonizing over font families and color palletes (especially dark mode) this time round.
+
+I'd read a bit about [Tufte CSS](https://edwardtufte.github.io/tufte-css/) and even found [this blog](https://lawler.io/) on [Hacker News](https://news.ycombinator.com/news) that employed similar techniques. I knew I wanted something like this that really felt like it _got out of the way_ and just let readers read!
+
+Overall I am really happy with where I got to on this and think I achieved the aesthetic I initally set out to uncover. It is worth noting that a huge part of my success here can be attributed to the [`@tailwindcss/typography`](https://tailwindcss.com/docs/typography-plugin) plugin which made styling markdown pages an absolute breeze.
+
+### Building something with best in class TypeScript support 
+
+This was easily the most important thing to me. In [previous](https://chopfitzroy.dev/) blogging I had noticed a pattern in the terms of content I enjoyed authoring. Most of this content was situated around the JavaScript/TypeScript space so I wanted to make sure that these two languages got the most love when it came to interactive code snippets.
+
+Enter [Shiki Twoslash](https://shikijs.github.io/twoslash/) 🎉 I had been watching this library for some time and knew that it was going to be the secrect sauce that took my TypeScript snippets to the next level. There were a [number of challenges]() in terms of getting it up and running but now that the hard work is over it's hard to imagine a time without it!
 
 ```ts twoslash
 interface IdLabel {
