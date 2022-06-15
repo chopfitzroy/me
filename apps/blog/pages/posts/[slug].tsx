@@ -1,11 +1,11 @@
 import { FC } from "react";
+import { BlogInternalLink } from "ui";
 import { ParsedUrlQuery } from "querystring";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { allPosts } from "../../.contentlayer/generated";
-import { PostsLayout } from "../../components/PostsLayout";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import type { Post } from "../../.contentlayer/generated";
-import { authoringComponents } from "../../utilities/authoring";
+import { PostsLayout } from "../../components/PostsLayout";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -19,7 +19,11 @@ const Posts: FC<PostsProps> = ({ post }) => {
   const Component = useMDXComponent(post.body.code);
   return (
     <PostsLayout {...post}>
-      <Component components={authoringComponents} />
+      <Component
+        components={{
+          BlogInternalLink,
+        }}
+      />
     </PostsLayout>
   );
 };

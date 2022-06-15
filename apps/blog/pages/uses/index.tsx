@@ -2,9 +2,9 @@ import { FC } from "react";
 import { GetStaticProps } from "next";
 import { Heading } from "../../components/Heading";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import { allPages, Pages } from "../../.contentlayer/generated";
+import { allPages, Page } from "../../.contentlayer/generated";
 
-interface UsesProps extends Pages {};
+interface UsesProps extends Page {}
 
 const Uses: FC<UsesProps> = ({ body: { code } }) => {
   const Component = useMDXComponent(code);

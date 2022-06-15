@@ -37,8 +37,18 @@ export const Post = defineDocumentType(() => ({
   },
 }));
 
-const Pages = defineDocumentType(() => ({
-  name: "Pages",
+const Workshop = defineDocumentType(() => ({
+  name: "Workshop",
+  filePathPattern: "workshops/*.mdx",
+  contentType: "mdx",
+  fields: {
+    title: { type: "string", required: true },
+  },
+  computedFields,
+}));
+
+const Page = defineDocumentType(() => ({
+  name: "Page",
   filePathPattern: "pages/*.mdx",
   contentType: "mdx",
   fields: {
@@ -50,7 +60,7 @@ const Pages = defineDocumentType(() => ({
 export default makeSource({
   disableImportAliasWarning: true,
   contentDirPath: "data",
-  documentTypes: [Post, Pages],
+  documentTypes: [Workshop, Page, Post],
   mdx: {
     remarkPlugins: [
       remarkGfm,
