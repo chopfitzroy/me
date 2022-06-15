@@ -2,13 +2,13 @@ import { Feed } from "feed";
 import { resolve } from 'path';
 import { parse } from 'date-fns';
 import { writeFileSync } from 'fs';
-import { allBlogs } from '../.contentlayer/generated/index.mjs';
+import { allPosts } from '../.contentlayer/generated/index.mjs';
 
 const generate = async () => {
     const output =  resolve(process.cwd() + '/public/');
     const feed = new Feed({
         title: "Otis Sutton",
-        description: "Otis Sutton blog RSS feed.",
+        description: "Otis Sutton posts RSS feed.",
         id: "https://otis.engineer/",
         link: "https://otis.engineer/",
         language: "en",
@@ -24,7 +24,7 @@ const generate = async () => {
         }
     });
 
-    const filtered = allBlogs.filter(({ draft }) => !draft);
+    const filtered = allPosts.filter(({ draft }) => !draft);
 
     const formatted = filtered.map(({ slug, title, description, publishedAt }) => {
         const link = `https://otis.engineer/posts/${slug}`;
