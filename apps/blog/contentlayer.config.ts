@@ -19,8 +19,8 @@ const computedFields: ComputedFields = {
 
 // NOTE: Mostly copied from:
 // - https://betterprogramming.pub/building-better-next-js-static-sites-with-mdx-and-contentlayer-9a06ca84e7f7
-export const Blog = defineDocumentType(() => ({
-  name: "Blog",
+export const Post = defineDocumentType(() => ({
+  name: "Post",
   // NOTE Needs to be `contentType`
   // - https://github.com/contentlayerdev/contentlayer/releases/tag/v0.1.0
   contentType: "mdx",
@@ -50,7 +50,7 @@ const Pages = defineDocumentType(() => ({
 export default makeSource({
   disableImportAliasWarning: true,
   contentDirPath: "data",
-  documentTypes: [Blog, Pages],
+  documentTypes: [Post, Pages],
   mdx: {
     remarkPlugins: [
       remarkGfm,

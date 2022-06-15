@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { BlogMetadata } from "ui";
-import type { Blog } from "../../.contentlayer/generated";
+import type { Post } from "../../.contentlayer/generated";
 
-interface BlogLayoutProps extends Blog {}
+interface PostsLayoutProps extends Post {}
 
-const BlogLayout: FC<BlogLayoutProps> = ({ children, ...props }) => {
+const PostsLayout: FC<PostsLayoutProps> = ({ children, ...props }) => {
   return (
     <article className="w-full max-w-screen-md p-4 pt-0">
       <BlogMetadata {...props} className="mb-4" />
@@ -15,4 +15,4 @@ const BlogLayout: FC<BlogLayoutProps> = ({ children, ...props }) => {
   );
 };
 
-export { BlogLayout };
+export { PostsLayout };

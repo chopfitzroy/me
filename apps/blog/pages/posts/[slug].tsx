@@ -1,47 +1,47 @@
 import { FC } from "react";
 import { ParsedUrlQuery } from "querystring";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { allBlogs } from "../../.contentlayer/generated";
-import { BlogLayout } from "../../components/BlogLayout";
+import { allPosts } from "../../.contentlayer/generated";
+import { PostsLayout } from "../../components/PostsLayout";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import type { Blog } from "../../.contentlayer/generated";
+import type { Post } from "../../.contentlayer/generated";
 import { authoringComponents } from "../../utilities/authoring";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
 }
 
-interface BlogProps {
-  blog: Blog;
+interface PostsProps {
+  post: Post;
 }
 
-const Blog: FC<BlogProps> = ({ blog }) => {
-  const Component = useMDXComponent(blog.body.code);
+const Posts: FC<PostsProps> = ({ post }) => {
+  const Component = useMDXComponent(post.body.code);
   return (
-    <BlogLayout {...blog}>
+    <PostsLayout {...post}>
       <Component components={authoringComponents} />
-    </BlogLayout>
+    </PostsLayout>
   );
 };
 
 const getStaticPaths: GetStaticPaths<Params> = async () => {
   return {
-    paths: allBlogs.map((blog) => ({ params: { slug: blog.slug } })),
+    paths: allPosts.map((post) => ({ params: { slug: post.slug } })),
     fallback: false,
   };
 };
 
-const getStaticProps: GetStaticProps<BlogProps, Params> = async ({
+const getStaticProps: GetStaticProps<PostsProps, Params> = async ({
   params,
 }) => {
-  const blog = allBlogs.find((blog) => blog.slug === params.slug);
-  if (blog === undefined) {
+  const post = allPosts.find((post) => post.slug === params.slug);
+  if (post === undefined) {
     return {
       notFound: true,
     };
   }
-  return { props: { blog } };
+  return { props: { post } };
 };
 
-export default Blog;
+export default Posts;
 export { getStaticPaths, getStaticProps };

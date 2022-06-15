@@ -8,12 +8,12 @@ import { useMain } from "../hooks/useMain";
 import { Heading } from "../components/Heading";
 import { PostList } from "../components/PostsList";
 import { serialize } from "next-mdx-remote/serialize";
-import { allBlogs, Blog } from "../.contentlayer/generated";
+import { allPosts, Post } from "../.contentlayer/generated";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 
 
 export interface MainProps {
-  posts: Blog[];
+  posts: Post[];
   content: MDXRemoteSerializeResult<Record<string, unknown>>
 }
 
@@ -66,7 +66,7 @@ const getStaticProps: GetStaticProps<MainProps> = async () => {
   const decoded = raw.toString("utf8");
   const content = await serialize(decoded);
 
-  const posts = allBlogs;
+  const posts = allPosts;
 
   return { props: { posts, content } };
 };

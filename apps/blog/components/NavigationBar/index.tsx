@@ -18,7 +18,7 @@ const NavigationBarItem: FC<NavigationBarItemProps> = ({
   return (
     <Link href={href}>
       <a
-        className={`block w-full px-2 py-4 border-b border-slate-200 dark:border-slate-800 sm:border-b-0 ${className}`}
+        className={`block w-full px-2 py-4 font-heading border-b border-slate-200 dark:border-slate-800 sm:border-b-0 ${className}`}
       >
         {children}
       </a>
@@ -52,7 +52,7 @@ const NavigationBar: FC = () => {
             <NavigationBarItem href="/">Home</NavigationBarItem>
           </li>
           <li>
-            <NavigationBarItem href="/blog">Blog</NavigationBarItem>
+            <NavigationBarItem href="/posts">Posts</NavigationBarItem>
           </li>
           <li>
             <NavigationBarItem href="/uses">Uses</NavigationBarItem>

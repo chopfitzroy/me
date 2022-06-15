@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 import { FC } from "react";
-import { Blog } from "../../.contentlayer/generated";
+import { Post } from "../../.contentlayer/generated";
 
 interface PostListProps {
-  posts: Blog[];
+  posts: Post[];
   className?: string;
 }
 

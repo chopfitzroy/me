@@ -1,18 +1,18 @@
-import { BlogProps } from "../pages/blog";
-import { Blog } from "../.contentlayer/generated";
+import { PostsProps } from "../pages/posts";
+import { Post } from "../.contentlayer/generated";
 import { useMemo, useState, useCallback, ChangeEvent } from "react";
 
 type SearchHandlerSignature = (event: ChangeEvent<HTMLInputElement>) => void;
-interface UseBlog {
-  posts: Blog[];
+interface usePosts {
+  posts: Post[];
   searchHandler: SearchHandlerSignature;
 }
 
-type UseBlogSignature = (props: BlogProps) => UseBlog;
-const useBlog: UseBlogSignature = (props) => {
+type usePostsSignature = (props: PostsProps) => usePosts;
+const usePosts: usePostsSignature = (props) => {
   const [searchValue, setSearchValue] = useState<string>("");
 
-  const posts = useMemo<Blog[]>(() => {
+  const posts = useMemo<Post[]>(() => {
     const filtered = props.posts.filter(({ draft }) => !draft);
 
     const sorted = filtered.sort(
@@ -43,4 +43,4 @@ const useBlog: UseBlogSignature = (props) => {
   };
 };
 
-export { useBlog };
+export { usePosts };

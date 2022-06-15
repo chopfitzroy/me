@@ -1,19 +1,19 @@
 import { FC } from "react";
 import { GetStaticProps } from "next";
-import { useBlog } from "../../hooks/useBlog";
+import { usePosts } from "../../hooks/usePosts";
 import { Heading } from "../../components/Heading";
 import { PostList } from "../../components/PostsList";
-import { allBlogs, Blog } from "../../.contentlayer/generated";
+import { allPosts, Post } from "../../.contentlayer/generated";
 
-export interface BlogProps {
-  posts: Blog[];
+export interface PostsProps {
+  posts: Post[];
 }
 
-const Blog: FC<BlogProps> = (props) => {
-  const { posts, searchHandler } = useBlog(props);
+const Posts: FC<PostsProps> = (props) => {
+  const { posts, searchHandler } = usePosts(props);
   return (
     <div className="w-full max-w-screen-md p-4 pt-0">
-      <Heading>Blog</Heading>
+      <Heading>Posts</Heading>
       <p className="mb-4 font-body text-slate-700 dark:text-slate-200">
         Hey there 👋 I&apos;ve been writing on and off for a few years now. Most
         of what you will find here is strictly related to programming or team
@@ -33,10 +33,10 @@ const Blog: FC<BlogProps> = (props) => {
   );
 };
 
-const getStaticProps: GetStaticProps<BlogProps> = () => {
-  const posts = allBlogs;
+const getStaticProps: GetStaticProps<PostsProps> = () => {
+  const posts = allPosts;
   return { props: { posts } };
 };
 
-export default Blog;
+export default Posts;
 export { getStaticProps };
