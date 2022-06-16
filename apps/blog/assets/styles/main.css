@@ -12,5 +12,20 @@
 }
 
 pre.twoslash {
-	border: 0;
+  border: 0;
+}
+
+/* Responsive video */
+/* Could do this with Tailwind but prefer to be explicit */
+/* https://github.com/CookPete/react-player#responsive-player  */
+
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25%;
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

@@ -6,6 +6,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import { allWorkshops } from "../../.contentlayer/generated";
 import type { Workshop } from "../../.contentlayer/generated";
 import { WorkshopsLayout } from "../../components/WorkshopsLayout";
+import { ResponsivePlayer } from "../../components/ResponsivePlayer";
 import { FunctionalBasicsVocabulary } from "../../components/Workshops/FunctionalBasicsVocabulary";
 
 interface Params extends ParsedUrlQuery {
@@ -22,6 +23,7 @@ const Workshops: FC<WorkshopsProps> = ({ workshop }) => {
     <WorkshopsLayout {...workshop}>
       <Component
         components={{
+          ResponsivePlayer,
           BlogInternalLink,
           FunctionalBasicsVocabulary,
         }}
@@ -32,7 +34,9 @@ const Workshops: FC<WorkshopsProps> = ({ workshop }) => {
 
 const getStaticPaths: GetStaticPaths<Params> = async () => {
   return {
-    paths: allWorkshops.map((workshop) => ({ params: { slug: workshop.slug } })),
+    paths: allWorkshops.map((workshop) => ({
+      params: { slug: workshop.slug },
+    })),
     fallback: false,
   };
 };

@@ -18,7 +18,7 @@ const NavigationBarItem: FC<NavigationBarItemProps> = ({
   return (
     <Link href={href}>
       <a
-        className={`block w-full px-2 py-4 font-heading border-b border-slate-200 dark:border-slate-800 sm:border-b-0 ${className}`}
+        className={`block w-full px-2 py-4 text-xl font-heading border-b border-slate-200 dark:border-slate-800 sm:border-b-0 ${className}`}
       >
         {children}
       </a>
@@ -49,13 +49,13 @@ const NavigationBar: FC = () => {
       >
         <ul className="flex flex-col sm:flex-row font-bold text-slate-700 dark:text-slate-200">
           <li>
-            <NavigationBarItem href="/">Home</NavigationBarItem>
+            <NavigationBarItem href="/" className="sm:pl-0">Home</NavigationBarItem>
           </li>
           <li>
             <NavigationBarItem href="/posts">Posts</NavigationBarItem>
           </li>
           <li>
-            <NavigationBarItem href="/uses">Uses</NavigationBarItem>
+            <NavigationBarItem href="/uses" className="sm:pr-0">Uses</NavigationBarItem>
           </li>
         </ul>
       </div>
