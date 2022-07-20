@@ -66,11 +66,11 @@ const useTwoDayList = () => {
   }, [todoList, removeTwoDay]);
 
   const completeTwoDayList = useMemo(() => {
-    return formattedTwoDayList.filter((item) => item.checked);
+    return formattedTwoDayList.filter((item) => item.checked).reverse();
   }, [formattedTwoDayList]);
 
   const incompleteTwoDayList = useMemo(() => {
-    return formattedTwoDayList.filter((item) => !item.checked);
+    return formattedTwoDayList.filter((item) => !item.checked).reverse();
   }, [formattedTwoDayList]);
 
   return {
