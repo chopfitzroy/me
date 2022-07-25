@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { useImmer } from "use-immer";
 import { FormEvent, useCallback, useMemo, useRef } from "react";
 
@@ -11,34 +12,44 @@ interface TwoDayListFormElement extends HTMLFormElement {
 export interface TwoDay {
   title: string;
   checked: boolean;
+  position?: number;
 }
 
 type AddTwoDaySignature = (item: TwoDay) => void;
-type RemoveTwoDaySignature = (item: TwoDay) => void;
+type RemoveTwoDaySignature = (id: string) => void;
+type ToggleTwoDaySignature = (id: string) => void;
 type HandleFormSubmission = (event: FormEvent<TwoDayListFormElement>) => void;
 
 const useTwoDayList = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
-  const [todoList, setTwoDayList] = useImmer(new Set<TwoDay>());
+  const [todoList, setTwoDayList] = useImmer(new Map<string, TwoDay>());
 
   const addTwoDay = useCallback<AddTwoDaySignature>((item) => {
+    // TODO add position
     setTwoDayList((current) => {
-      current.add(item);
+      current.set(nanoid(), item);
     });
   }, []);
 
-  const removeTwoDay = useCallback<RemoveTwoDaySignature>((item) => {
+  const removeTwoDay = useCallback<RemoveTwoDaySignature>((id) => {
     setTwoDayList((current) => {
-      current.delete(item);
+      current.delete(id);
     });
   }, []);
 
-  const toggleTwoDay = useCallback<RemoveTwoDaySignature>((item) => {
+  const toggleTwoDay = useCallback<ToggleTwoDaySignature>((id) => {
     setTwoDayList((current) => {
-      const { title, checked } = item;
-      current.delete(item);
-      current.add({ title, checked: !checked });
+      const item = current.get(id);
+      if (!item) {
+        console.warn(`No item found with id: ${id} aborting!`);
+        return;
+      }
+      // TODO update position
+      current.set(id, {
+        ...item,
+        checked: !item.checked,
+      });
     });
   }, []);
 
@@ -56,21 +67,21 @@ const useTwoDayList = () => {
   );
 
   const formattedTwoDayList = useMemo(() => {
-    return [...todoList].map((item) => {
+    return [...todoList.entries()].map(([id, item]) => {
       return {
         ...item,
-        toggle: () => toggleTwoDay(item),
-        remove: () => removeTwoDay(item),
+        toggle: () => toggleTwoDay(id),
+        remove: () => removeTwoDay(id),
       };
     });
   }, [todoList, removeTwoDay]);
 
   const completeTwoDayList = useMemo(() => {
-    return formattedTwoDayList.filter((item) => item.checked).reverse();
+    return formattedTwoDayList.filter((item) => item.checked);
   }, [formattedTwoDayList]);
 
   const incompleteTwoDayList = useMemo(() => {
-    return formattedTwoDayList.filter((item) => !item.checked).reverse();
+    return formattedTwoDayList.filter((item) => !item.checked);
   }, [formattedTwoDayList]);
 
   return {
