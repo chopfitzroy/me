@@ -1,0 +1,25 @@
+{
+  "name": "rehype-image-link",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Wrap images in links back to themselves",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup-node --format esm src/index.ts"
+  },
+  "keywords": [
+    "rehype",
+    "image",
+    "link"
+  ],
+  "author": "Otis Sutton",
+  "license": "MIT",
+  "dependencies": {
+    "hast-util-is-element": "^2.1.2",
+    "unist-util-visit": "^4.1.0"
+  },
+  "devDependencies": {
+    "tsup": "^6.2.0"
+  }
+}
