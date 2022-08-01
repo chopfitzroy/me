@@ -1,46 +1,35 @@
-// import path from "node:path";
-
 import { visit } from "unist-util-visit";
 import { isElement } from "hast-util-is-element";
 
-const own = {}.hasOwnProperty;
+const rehypeImageLink = () => (tree) => {
+  visit(tree, "element", (node, index, parent) => {
+    const conditions = [
+      !parent,
+      !node.properties,
+      !node.properties.src,
+      typeof index !== "number",
+      isElement(parent, "a"),
+      !isElement(node, "img"),
+    ];
 
-export default function rehypePicture(options) {
-  const settings = options || {};
+    if (conditions.some((item) => !!item)) {
+      return;
+    }
 
-  return (tree) => {
-    visit(tree, "element", (node, index, parent) => {
-      if (
-        !parent ||
-        typeof index !== "number" ||
-        isElement(parent, "a") ||
-        !isElement(node, "img") ||
-        !node.properties ||
-        !node.properties.src
-      ) {
-        return;
-      }
+    const src = String(node.properties.src);
 
-      const src = String(node.properties.src);
+    const replacement = {
+      type: "element",
+      tagName: "a",
+      properties: {
+        href: src,
+        target: "_blank",
+      },
+      children: [node],
+    };
 
-      // @TODO
-      // - Figure this out...
-      //   const extension = path.extname(src).slice(1)
-      //   if (!own.call(settings, extension)) {
-      //     return
-      //   }
+    parent.children[index] = replacement;
+  });
+};
 
-      const replacement = {
-        type: "element",
-        tagName: "a",
-        properties: {
-          href: src,
-          target: "_blank",
-        },
-        children: [node],
-      };
-
-      parent.children[index] = replacement;
-    });
-  };
-}
+export default rehypeImageLink;
