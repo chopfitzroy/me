@@ -1,5 +1,6 @@
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import rehypeImageLink from "rehype-image-link";
 import readingTime from "reading-time";
 import remarkShikiTwoslash from "remark-shiki-twoslash";
 
@@ -74,6 +75,6 @@ export default makeSource({
     // - Fixes Shiki not being able to handle `raw` type
     // - https://github.com/shikijs/twoslash/issues/125
     //- https://github.com/mdx-js/mdx/issues/1820
-    rehypePlugins: [[rehypeRaw, { passThrough: nodeTypes }]],
+    rehypePlugins: [[rehypeRaw, { passThrough: nodeTypes }], rehypeImageLink],
   },
 });

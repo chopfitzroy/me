@@ -42,6 +42,7 @@
     "next-transpile-modules": "9.0.0",
     "postcss": "^8.4.12",
     "reading-time": "^1.5.0",
+    "rehype-image-link": "*",
     "rehype-raw": "^6.1.1",
     "remark-gfm": "^3.0.1",
     "remark-shiki-twoslash": "^3.0.9",
