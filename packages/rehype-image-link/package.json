@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsup-node --format esm src/index.ts"
+    "build": "tsup-node --dts --format esm src/index.ts"
   },
   "keywords": [
     "rehype",
