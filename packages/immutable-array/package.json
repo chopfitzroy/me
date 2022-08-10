@@ -1,0 +1,25 @@
+{
+  "name": "immutable-array",
+  "version": "1.0.0",
+  "description": "Immutable array helpers",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chopfitzroy/me.git"
+  },
+  "keywords": [
+    "immutable",
+    "array",
+    "functional",
+    "utility"
+  ],
+  "author": "Otis Sutton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chopfitzroy/me/issues"
+  },
+  "homepage": "https://github.com/chopfitzroy/me#readme"
+}
