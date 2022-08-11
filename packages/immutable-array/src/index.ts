@@ -1,17 +1,26 @@
-const atIndex = <T = unknown>(payload: T[], index: number): T | undefined => {
-  const [item] = payload.slice(index, 1);
-  return item;
-};
-
 const head = <T = unknown>(payload: T[]): T | undefined => {
-  return atIndex<T>(payload, 0);
+  const [head] = payload.slice(0, 1);
+  return head;
 };
 
 const tail = <T = unknown>(payload: T[]): T | undefined => {
-  // @NOTE
-  // - Can't use `atIndex` here unfortunately
   const [last] = payload.slice(-1);
   return last;
+};
+
+// @NOTE
+// - Throwing error here to make below functions simpler
+const atIndex = <T = unknown>(payload: T[], index: number): T => {
+  const adjustedIndex = index + 1;
+  const [item] = payload.slice(index, adjustedIndex);
+
+  if (item === undefined) {
+    throw new Error(
+      `Could not find valid value at ${index}. Please check array value`
+    );
+  }
+
+  return item;
 };
 
 const replaceMultiple = <T = unknown>(
@@ -37,7 +46,11 @@ const findAndReplace = <T = unknown>(
   return replace<T>(payload, index, value);
 };
 
-// @TODO
-// Add `swap` function that will use `atIndex` and `replaceMultiple`
+const swap = <T = unknown>(payload: T[], a: number, b: number): T[] => {
+  const aValue = atIndex<T>(payload, a);
+  const bValue = atIndex<T>(payload, b);
 
-export { head, tail, replace, atIndex, findAndReplace, replaceMultiple };
+  return replaceMultiple<T>(payload, [a, bValue], [b, aValue]);
+};
+
+export { swap, head, tail, replace, atIndex, findAndReplace, replaceMultiple };
