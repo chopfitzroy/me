@@ -1,52 +1,58 @@
-const head = <T = unknown>(payload: T[]): T | undefined => {
+// @NOTE
+// - We use `U` to satisfy bad indexes
+// - The responsibility of index checks belongs to the consumer
+type U<T> = T | undefined;
+
+const head = <T = unknown>(payload: U<T>[]): U<T> => {
   const [head] = payload.slice(0, 1);
   return head;
 };
 
-const tail = <T = unknown>(payload: T[]): T | undefined => {
+const tail = <T = unknown>(payload: U<T>[]): U<T> => {
   const [last] = payload.slice(-1);
   return last;
 };
 
-// @NOTE
-// - Throwing error here to make below functions simpler
-const atIndex = <T = unknown>(payload: T[], index: number): T => {
+const atIndex = <T = unknown>(payload: U<T>[], index: number): U<T> => {
   const adjustedIndex = index + 1;
   const [item] = payload.slice(index, adjustedIndex);
-
-  if (item === undefined) {
-    throw new Error(
-      `Could not find valid value at ${index}. Please check array value`
-    );
-  }
 
   return item;
 };
 
 const replaceMultiple = <T = unknown>(
-  payload: T[],
-  ...args: [index: number, value: T][]
-): T[] => {
+  payload: U<T>[],
+  ...args: [index: number, value: U<T>][]
+): U<T>[] => {
   return args.reduce((result, [index, value]) => {
     const adjustedIndex = index + 1;
     return [...result.slice(0, index), value, ...payload.slice(adjustedIndex)];
   }, payload);
 };
 
-const replace = <T = unknown>(payload: T[], index: number, value: T): T[] => {
+const replace = <T = unknown>(
+  payload: U<T>[],
+  index: number,
+  value: U<T>
+): U<T>[] => {
   return replaceMultiple<T>(payload, [index, value]);
 };
 
 const findAndReplace = <T = unknown>(
-  payload: T[],
-  find: (item: T) => boolean,
+  payload: U<T>[],
+  find: (item: U<T>) => boolean,
   value: T
-): T[] => {
+): U<T>[] => {
   const index = payload.findIndex(find);
+
+  if (index < 0) {
+    return [...payload];
+  }
+
   return replace<T>(payload, index, value);
 };
 
-const swap = <T = unknown>(payload: T[], a: number, b: number): T[] => {
+const swap = <T = unknown>(payload: U<T>[], a: number, b: number): U<T>[] => {
   const aValue = atIndex<T>(payload, a);
   const bValue = atIndex<T>(payload, b);
 
