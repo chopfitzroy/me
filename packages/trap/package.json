@@ -1,0 +1,31 @@
+{
+  "name": "trap",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Trap errors and resolve promises",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup-node --dts --format esm,cjs,iife src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chopfitzroy/me.git"
+  },
+  "keywords": [
+    "trap",
+    "async",
+    "error",
+    "promise",
+    "utility"
+  ],
+  "author": "Otis Sutton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chopfitzroy/me/issues"
+  },
+  "homepage": "https://github.com/chopfitzroy/me#readme",
+  "devDependencies": {
+    "tsup": "^6.2.0"
+  }
+}
