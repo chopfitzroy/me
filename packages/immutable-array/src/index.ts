@@ -14,9 +14,7 @@ const tail = <T = unknown>(payload: U<T>[]): U<T> => {
 };
 
 const atIndex = <T = unknown>(payload: U<T>[], index: number): U<T> => {
-  const adjustedIndex = index + 1;
-  const [item] = payload.slice(index, adjustedIndex);
-
+  const [item] = payload.slice(index, index + 1);
   return item;
 };
 
@@ -25,8 +23,13 @@ const replaceMultiple = <T = unknown>(
   ...args: [index: number, value: U<T>][]
 ): U<T>[] => {
   return args.reduce((result, [index, value]) => {
-    const adjustedIndex = index + 1;
-    return [...result.slice(0, index), value, ...payload.slice(adjustedIndex)];
+    // @NOTE
+    // - Intentionally catch negative index as they wrap around with `slice`
+    if (index < 0) {
+      return [...result];
+    }
+
+    return [...result.slice(0, index), value, ...payload.slice(index + 1)];
   }, payload);
 };
 
@@ -44,18 +47,12 @@ const findAndReplace = <T = unknown>(
   value: T
 ): U<T>[] => {
   const index = payload.findIndex(find);
-
-  if (index < 0) {
-    return [...payload];
-  }
-
   return replace<T>(payload, index, value);
 };
 
 const swap = <T = unknown>(payload: U<T>[], a: number, b: number): U<T>[] => {
   const aValue = atIndex<T>(payload, a);
   const bValue = atIndex<T>(payload, b);
-
   return replaceMultiple<T>(payload, [a, bValue], [b, aValue]);
 };
 
