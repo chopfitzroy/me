@@ -7,7 +7,7 @@ import { remarkCodeHike } from "@code-hike/mdx";
 
 const require = createRequire(import.meta.url);
 
-const theme = require("shiki/themes/nord.json");
+const theme = require("shiki/themes/dracula.json");
 
 import {
   makeSource,
@@ -42,16 +42,6 @@ export const Post = defineDocumentType(() => ({
   },
 }));
 
-const Workshop = defineDocumentType(() => ({
-  name: "Workshop",
-  filePathPattern: "workshops/*.mdx",
-  contentType: "mdx",
-  fields: {
-    title: { type: "string", required: true },
-  },
-  computedFields,
-}));
-
 const Page = defineDocumentType(() => ({
   name: "Page",
   filePathPattern: "pages/*.mdx",
@@ -65,7 +55,7 @@ const Page = defineDocumentType(() => ({
 export default makeSource({
   disableImportAliasWarning: true,
   contentDirPath: "data",
-  documentTypes: [Workshop, Page, Post],
+  documentTypes: [Page, Post],
   mdx: {
     rehypePlugins: [rehypeImageLink],
     remarkPlugins: [remarkGfm, [remarkCodeHike, { theme }]],
