@@ -8,7 +8,7 @@ For the longest time I've wanted to build a blog from scratch, something I could
 
 Well after years of failed attempts and moving onto the _next thing_ I am happy to say I have finally built a blog the way I want.
 
-What was the main difference this time? I had a clear vision of what I wanted. I have blogged before on platforms like [Medium](https://medium.com/@crashybang/about), as well as hosting an [11ty starter kit](https://chopfitzroy.dev/). But none of that had really stuck... I wasn't invested in the outcome, I didn't know what I wanted to write about and I had no schedule or motivators to encourage me to keep going.
+What was the main difference this time? I had a clear vision of what I wanted. I have blogged before on platforms like [Medium](https://medium.com/@crashybang/about), as well as hosting an [11ty starter kit](https://github.com/chopfitzroy/chopfitzroy.dev). But none of that had really stuck... I wasn't invested in the outcome, I didn't know what I wanted to write about and I had no schedule or motivators to encourage me to keep going.
 
 So this time I outlined what I wanted to achieve _long_ before I wrote any code. Here is a list of things I knew I wanted.
 
@@ -23,11 +23,11 @@ So with that in mind let's break down how I achieved the above.
 
 ### Building something extenable
 
-There were a couple of key critera here, I wanted something that didn't have too much _magic_ and utilized technologies I enjoyed working with. The technologies I wanted to include were primary [React]() and [Tailwind]().
+There were a couple of key critera here, I wanted something that didn't have too much _magic_ and utilized technologies I enjoyed working with. The technologies I wanted to include were primary [React](https://beta.reactjs.org/) and [Tailwind](https://tailwindcss.com/).
 
-Now one of my other critera was something with good SEO and preferably a static site generator, initially I reached for [Astro]() which I had been reading about a lot and supported [React]() and [Tailwind]() in the way that I wanted.
+Now one of my other critera was something with good SEO and preferably a static site generator, initially I reached for [Astro]() which I had been reading about a lot and supported [React](https://beta.reactjs.org/) and [Tailwind](https://tailwindcss.com/) in the way that I wanted.
 
-Initially I really wanted to use [Shiki Twoslash](https://shikijs.github.io/twoslash/) for it's **amazing** TypeScript snippets. Unfortunately I could [not  get this up and running](https://github.com/shikijs/twoslash/issues/148) [Astro](https://astro.build/). So I ended up running with [Next.js](https://nextjs.org/) which has ended up bening an absolute please to work with.
+Initially I really wanted to use [Shiki Twoslash](https://shikijs.github.io/twoslash/) for it's **amazing** TypeScript snippets. Unfortunately I could [not  get this up and running](https://github.com/shikijs/twoslash/issues/148) with [Astro](https://astro.build/). So I ended up running with [Next.js](https://nextjs.org/) which has ended up bening an absolute please to work with.
 
 The first thing I did was setup `.mdx` file support so I could author blog posts using this format. However it pretty quickly became apparent that the [suggested way](https://nextjs.org/docs/advanced-features/using-mdx) of setting this up while adequate created a somewhat awkward publishing flow.
 
