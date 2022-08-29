@@ -16,7 +16,7 @@ So this time I outlined what I wanted to achieve _long_ before I wrote any code.
 - Something that supported `.mdx` files which are my favourite way of authoring content.
 - Something fast with good SEO preferably a static site generator if possible.
 - Something that considers the reading experience a top priority.
-- First class TypeScript support in terms of code snippets.
+- Interactive and informative code snippets that could be easily walked through.
 - A workflow that allowed my partner to proof read my posts and provide feedback before publishing.
 
 So with that in mind let's break down how I achieved the above.
@@ -27,11 +27,13 @@ There were a couple of key critera here, I wanted something that didn't have too
 
 Now one of my other critera was something with good SEO and preferably a static site generator, initially I reached for [Astro]() which I had been reading about a lot and supported [React]() and [Tailwind]() in the way that I wanted.
 
-Unfortunately I also wanted to use [Shiki Twoslash]() which I will discuss more later for TypeScript snippets and no matter how hard [I tried]() I could not figure out a way to make this work with [Astro](). So what now? Well the next obvious choice was [Next.js]() which I knew about but have never used personally.
+Initially I really wanted to use [Shiki Twoslash](https://shikijs.github.io/twoslash/) for it's **amazing** TypeScript snippets. Unfortunately I could [not  get this up and running](https://github.com/shikijs/twoslash/issues/148) [Astro](https://astro.build/). So I ended up running with [Next.js](https://nextjs.org/) which has ended up bening an absolute please to work with.
 
-Like most people I have heard of and even used [Vercel]() so I was familiar enough with what [Next.js]() was but have never been lucky enough to work with it professionally, spoiler alert it's amazing! The first thing I did was setup `.mdx` file support so I could author blog posts using this format. However it pretty quickly became apparent that the [suggested way](https://nextjs.org/docs/advanced-features/using-mdx) of setting this up while adequate created a somewhat awkward publishing flow.
+The first thing I did was setup `.mdx` file support so I could author blog posts using this format. However it pretty quickly became apparent that the [suggested way](https://nextjs.org/docs/advanced-features/using-mdx) of setting this up while adequate created a somewhat awkward publishing flow.
 
-Excited by this new tool and enjoying the process so far I set out to investigate how other developers were solving this problem, and boy oh boy was it my lucky day when I stumbled across [Lee Robinson's own blog](https://leerob.io/) which is also powered by [Next.js]() and uses [contentlayer](https://www.contentlayer.dev/) for content management. I cannot **overstate** just how much this tool changes the game! It makes authoring content in [Next.js]() applications an absolute pleasure!
+Excited by this new tool and enjoying the process so far I set out to investigate how other developers were solving this problem, and boy oh boy was it my lucky day when I stumbled across [Lee Robinson's own blog](https://leerob.io/) which is also powered by [Next.js](https://nextjs.org/) and uses [contentlayer](https://www.contentlayer.dev/) for content management. I cannot **overstate** just how much this tool changes the game! It makes authoring content in [Next.js](https://nextjs.org/) applications an absolute pleasure!
+
+**Update:** Since publishing this article [Lee Robinson's blog](https://leerob.io/) has moved over to [Sanity](https://www.sanity.io/) so if you are interested in his original implementation be sure to work through [his repositories](https://github.com/leerob/leerob.io) history.
 
 Setting this tools up is a tad involved and not really something I want to go into as part of this post, that being said the [source code](https://github.com/chopfitzroy/me) for this entire blog is available on Github so I encourage you to check it out if you are interested in trying these tools out for yourself.
 
@@ -53,28 +55,35 @@ I'd read a bit about [Tufte CSS](https://edwardtufte.github.io/tufte-css/) and e
 
 Overall I am really happy with where I got to on this and think I achieved the aesthetic I initally set out to uncover. It is worth noting that a huge part of my success here can be attributed to the [`@tailwindcss/typography`](https://tailwindcss.com/docs/typography-plugin) plugin which made styling markdown pages an absolute breeze.
 
-### Building something with best in class TypeScript support 
+### Building something with interactive and informative code snippets
 
-This was easily the most important thing to me. In [previous](https://chopfitzroy.dev/) blogging I had noticed a pattern in the terms of content I enjoyed authoring. Most of this content was situated around the JavaScript/TypeScript space so I wanted to make sure that these two languages got the most love when it came to interactive code snippets.
+This was easily the most important thing to me. In previous blogging I had noticed a pattern in the terms of content I enjoyed authoring. Most of this content was situated around the JavaScript/TypeScript space so I wanted to make sure that these two languages got the most love when it came to interactive code snippets.
 
-Enter [Shiki Twoslash](https://shikijs.github.io/twoslash/) 🎉 I had been watching this library for some time and knew that it was going to be the secrect sauce that took my TypeScript snippets to the next level. There were a [number of challenges]() in terms of getting it up and running but now that the hard work is over it's hard to imagine a time without it!
+I explored a ton of options in this space and the top contenders were [Shiki Twoslash](https://shikijs.github.io/twoslash/), [Sandpack](https://sandpack.codesandbox.io/) and [CodeHike](https://codehike.org/) (which actually leverages [Sandpack](https://sandpack.codesandbox.io/) for it's previews).
 
-```ts twoslash
-interface IdLabel {
-  id: number /* some fields */;
-}
-interface NameLabel {
-  name: string /* other fields */;
-}
-type NameOrId<T extends number | string> = T extends number
-  ? IdLabel
-  : NameLabel;
-// This comment should not be included
+Each of these options have serious pros and cons and I encourage you to check them all out if you are thinking of doing something similar. For myself [CodeHike](https://codehike.org/) ended up being the best option, [Shiki Twoslash](https://shikijs.github.io/twoslash/) actually had it beat on enhanced TypeScript support and [Sandpack](https://sandpack.codesandbox.io/) is arguably more customisable but [CodeHike](https://codehike.org/) has the nicest _out of the box_ features and allowed me to get up and running quickly. Additionally [CodeHike](https://codehike.org/) provided the most streamlined way to provide code _walk throughs_ which I consider to be a top priority as far as my blog is concerned.
 
-// ---cut---
-function createLabel<T extends number | string>(idOrName: T): NameOrId<T> {
-  throw "unimplemented";
-}
+<CH.Code>
 
-let a = createLabel("typescript");
+```ts one.ts
+type U<T> = T | undefined;
+
+const trap =
+  <T extends (...args: any[]) => any>(handler: T) =>
+  async (...args: Parameters<T>): Promise<[unknown, U<ReturnType<T>>]> => {
+    try {
+      const result = await handler(...args);
+      return [undefined, result];
+    } catch (err) {
+      return [err, undefined];
+    }
+  };
+
+export { trap };
 ```
+
+```ts two.ts
+console.log('Hello World');
+```
+
+</CH.Code>

@@ -1,14 +1,18 @@
 import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
-import rehypeImageLink from "rehype-image-link";
 import readingTime from "reading-time";
-import remarkShikiTwoslash from "remark-shiki-twoslash";
+import rehypeImageLink from "rehype-image-link";
 
-import { nodeTypes } from "@mdx-js/mdx";
+import { createRequire } from "module";
+import { remarkCodeHike } from "@code-hike/mdx";
+
+const require = createRequire(import.meta.url);
+
+const theme = require("shiki/themes/nord.json");
+
 import {
   makeSource,
-  defineDocumentType,
   ComputedFields,
+  defineDocumentType,
 } from "contentlayer/source-files";
 
 const computedFields: ComputedFields = {
@@ -63,18 +67,7 @@ export default makeSource({
   contentDirPath: "data",
   documentTypes: [Workshop, Page, Post],
   mdx: {
-    remarkPlugins: [
-      remarkGfm,
-      [
-        // @ts-ignore
-        // - https://github.com/shikijs/twoslash/issues/147
-        remarkShikiTwoslash.default,
-        { themes: ["github-dark", "github-light"] },
-      ],
-    ],
-    // - Fixes Shiki not being able to handle `raw` type
-    // - https://github.com/shikijs/twoslash/issues/125
-    //- https://github.com/mdx-js/mdx/issues/1820
-    rehypePlugins: [[rehypeRaw, { passThrough: nodeTypes }], rehypeImageLink],
+    rehypePlugins: [rehypeImageLink],
+    remarkPlugins: [remarkGfm, [remarkCodeHike, { theme }]],
   },
 });
