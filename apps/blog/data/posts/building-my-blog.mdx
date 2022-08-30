@@ -41,15 +41,15 @@ Setting up [contentlayer](https://www.contentlayer.dev/) up is a relatively invo
 
 Usually when I build something for myself I consider SEO an absolute last priority. This isn't because I don't want people to find what I'm building but more that most of what I build is for myself and I'm not really bothered about whether or not other people can find it.
 
-Moving forward I want to change this and definitely put an effort in to make myself more easily found on the web. Currently this means utilizing tools like [`next-sitemap`](https://github.com/iamvishnusankar/next-sitemap) as well as relying on a lot of the optimizations [Next.js](https://nextjs.org/) already makes under the hood.
+Moving forward I want to change this and definitely put an effort into making myself more easily found online. Currently this means utilizing tools like [`next-sitemap`](https://github.com/iamvishnusankar/next-sitemap) as well as relying on a lot of the optimizations [Next.js](https://nextjs.org/) already makes under the hood.
 
-There is definitely an area where I would like to do some further study and improve my own understanding of what makes for good SEO. In the past I have been fortunate enough to work with people well versed in this area who have handled a lot of the heavy lifting.
+This is definitely an area where I would like to do some further study and improve my own understanding of what makes for good SEO. In the past I have been fortunate enough to work with people well versed in this area who have handled a lot of the heavy lifting.
 
 ### Making sure that reading content was enjoyable
 
 There is nothing I love more than a blog that is primarily focused around the content it delivers, minimal use of popups, carousels, etc... I spent a lot of time agonizing over font families and color palletes (especially dark mode) this time round.
 
-I'd read a bit about [Tufte CSS](https://edwardtufte.github.io/tufte-css/) and even found [this blog](https://lawler.io/) on [Hacker News](https://news.ycombinator.com/news) that employed similar techniques. I knew I wanted something like this that really felt like it _got out of the way_ and just let readers read!
+I'd read a bit about [Tufte CSS](https://edwardtufte.github.io/tufte-css/) and even found [a blog](https://lawler.io/) on Hacker News that employed similar techniques. I knew I wanted something like this that really felt like it _got out of the way_ and just let readers read!
 
 Overall I am really happy with where I got to on this and think I achieved the aesthetic I initally set out to uncover. It is worth noting that a huge part of my success here can be attributed to the [`@tailwindcss/typography`](https://tailwindcss.com/docs/typography-plugin) plugin which made styling markdown pages an absolute breeze.
 
@@ -84,6 +84,14 @@ export { trap };
 
 This was arguably the most technical challenge of setting up my new blog. Historically my partner and I had used a combination of screenshots and word documents when proofing my posts. I desperately wanted to improve this process moving forward and make it as streamlined as possible.
 
-The challenge here was introducing a system that improved the proofing process without dictating any design decisions related to the structure of the application or adding to the overall weight of the application once it is deployed.
+The challenge here was introducing a system that improved the proofing process without dictating any design decisions related to the structure of the application or adding to the overall weight of the application once it was deployed.
 
 Enter [Netlify Deploy Previews](https://www.netlify.com/products/deploy-previews/) 🥰 now considering I am deploying a [Next.js](https://nextjs.org/) application my first thought was to deploy with [Vercel](https://vercel.com/) given they are the creators of [Next.js](https://nextjs.org/) after all. However [Netlify Deploy Previews](https://www.netlify.com/products/deploy-previews/) are just **too damn good** when it comes to creating a feedback/proofing loop, especially if you want a process that exists separate to your applications codebase.
+
+I already had the [Netlify GitHub App](https://github.com/apps/netlify) installed against my GitHub account so there really was no configuration required to get this working. The most time consuming part of the process was setting my partner up with GitHub and Netlify accounts so I could add her as a team member to enable deploy previews!
+
+### Reflection
+
+Now that we are officially live I must say I am extremely happy with the overall result. I set out to create something that I could call my own and I honestly feel like I've created my own little cozy corner on the internet. There is still a ton of things I would like to do moving forward and this will definitely be a place where I experiment with different ideas and technologies.
+
+Phew! Thanks for making it this far 🥰 until next time. Stay safe out there 👋
