@@ -1,0 +1,65 @@
+---
+draft: true
+title: "TypeScript and error handling"
+publishedAt: "August 30, 2022"
+description: "Smarter error handling with accurate types!"
+---
+
+I've been thinking a lot about error handling in TypeScript lately. The more I think about it the more I dislike the `try` block.
+
+The problem with `try` is that whatever you `catch` is considered `unknown` by TypeScript. Now don't get me wrong this is the correct way for TypeScript to handle this issue. While most developers `throw` with an `Error` there is nothing stopping them from using `throw` with `null`, `false`, or something else entirely.
+
+Below is an example of rudementary `try` usage.
+
+```ts example.ts
+const functionToFail = async (shouldThrow: boolean) => {
+    if (shouldThrow) {
+        throw new Error('Failure');
+    }
+    
+    return 'Success';
+}
+
+try {
+    const response = await functionToFail(true);
+    return response;
+} catch (err) {
+    console.log('Something went wrong', err); // `err` is of type `unknown`
+}
+```
+
+In the above example `err` is of type `unknown` despite the fact that TypeScript has full scope over the `functionToFail`. Now this is technically correct because `functionToFail` could reference something internally that might throw any number of errorrs.
+
+Furthermore if I remove the `try` block completely TypeScript does nothing to warn me that calling `functionToFail` will throw an error and crash the process. Again this behavior is correct but I want a way to warn developers consuming my code that an error can be thrown and that it will be of a certain type.
+
+With all of that in mind, whats the solution? JavaScript does not allow me to catch specific errors. I could use `instanceof` to check whether an error is of a certain type or whether an error extends the base `Error` type. However this is somewhat clunky especially when I don't even know if the code I am wrapping can throw the error I am try to target with `instancceof`.
+
+Unhappy with the solutions available to me I asked myself, what is the problem I am actually trying to solve? Is it catching every error? Or is it catching a specific error? Now obviously this should be handled case by case, but in most of the time when I am thinking about error handling I am targetting a specific error or group of errors.
+
+Understanding the problem clearly helped me to understand why correct typing is so important to me. If I am trying to catch every error then the `try` block functionality is fine. Even the `unknown` type is somewhat acceptable as in most instances I will be handling the `catch` in the same way irrespective of the error thrown. However when I want to target a specific error or groups of errors it is very useful if TypeScript can help me determine what those errors are.
+
+With a solid understanding of the problem I was trying to solve I set out to see how other people were solving this problem. One of the things that immediately jumped out to me was how [fp-ts](https://gcanti.github.io/fp-ts/) were solving this problem with [TaskEither](https://gcanti.github.io/fp-ts/modules/TaskEither.ts.html).
+
+> `TaskEither<E, A>` represents an asynchronous computation that either yields a value of type `A` or fails yielding an error of type `E`.
+
+The [fp-ts](https://gcanti.github.io/fp-ts/) implementation comes with more ceremony than I am will to commit to, however the underlying principle is sound. So what does an basic implementation of that look like? Below is an example similar to the above but this time `functionToFail` can resolve with either the string `'Success'` or an `Error`.
+
+```ts example.ts
+const functionToFail = async (shouldThrow: boolean) => {
+    if (shouldThrow) {
+        return new Error('Failure');
+    }
+    
+    return 'Success';
+}
+
+const response = await functionToFail(true); // `response` is of type `Error` or 'Success'
+
+if (response instanceof Error) { // Using `instanceof` here makes sense because we know `Error` is a valid type of `response`
+    console.log('Something went wrong', response);
+    return;
+}
+
+return response;
+}
+```
