@@ -23,19 +23,19 @@ So with that in mind let's break down how I achieved the above.
 
 ### Building something extendable
 
-There were a couple of key critera here, I wanted something that didn't have too much _magic_ and utilized technologies I enjoyed working with. The technologies I wanted to include were primary [React](https://beta.reactjs.org/) and [Tailwind](https://tailwindcss.com/).
+There were a couple of key critera here, I wanted something that didn't have too much _magic_ and utilized technologies I enjoyed working with. The technologies I wanted to include were primarily [React](https://beta.reactjs.org/) and [Tailwind](https://tailwindcss.com/).
 
 Based on my other critera in particular good SEO I had a preference for static site generators, initially I reached for [Astro](https://astro.build/) which I had been reading about a lot at the time and that supported [React](https://beta.reactjs.org/) and [Tailwind](https://tailwindcss.com/) in the way that I wanted.
 
 Originally I wanted to include [Shiki Twoslash](https://shikijs.github.io/twoslash/) for it's **amazing** TypeScript snippets. Unfortunately I could [not  get this up and running](https://github.com/shikijs/twoslash/issues/148) with [Astro](https://astro.build/). So I ended up going with [Next.js](https://nextjs.org/) which has been an absolute please to work with.
 
-The first thing I set out to do was setup `.mdx` file support so I could author blog posts using my preferred format. It pretty quickly became apparent that the [suggested way](https://nextjs.org/docs/advanced-features/using-mdx) of setting this up while adequate created a somewhat awkward publishing flow.
+The first thing I set out to do was setup `.mdx` file support so I could author blog posts using my preferred format. It quickly became apparent that the [suggested way](https://nextjs.org/docs/advanced-features/using-mdx) of setting this up while adequate created a somewhat awkward publishing flow.
 
-Excited by this new tool and enjoying the process so far I set out to investigate how other developers were solving this problem. During this time I was fortunate enought to stumble across [Lee Robinson's blog](https://leerob.io/) which uses [contentlayer](https://www.contentlayer.dev/) for content management. This tool changed everything for me and made publishing `.mdx` files with [Next.js](https://nextjs.org/) a very pleasant experience. 
+Enjoying everything else about [Next.js](https://nextjs.org/) I set out to investigate how other developers were managing their own `.mdx` workflow. During this time I was fortunate enough to stumble across [Lee Robinson's blog](https://leerob.io/) which uses [Contentlayer](https://www.contentlayer.dev/) for content management. I cannot overstate how pleasant this tool is to work with, it made publishing `.mdx` files with [Next.js](https://nextjs.org/) an absolute breeze. 
 
 **Update:** Since publishing this article [Lee Robinson's blog](https://leerob.io/) has moved over to [Sanity](https://www.sanity.io/) so if you are interested in his original implementation be sure to work through [his repositories](https://github.com/leerob/leerob.io) history.
 
-Setting up [contentlayer](https://www.contentlayer.dev/) up is a relatively involved process and not really something I want to go into as part of this post, that being said the [source code](https://github.com/chopfitzroy/me) for this entire blog is available on GitHub so I encourage you to check it out if you are interested in trying these tools out for yourself.
+Setting up [Contentlayer](https://www.contentlayer.dev/) up is a relatively involved process and not really something I want to go into as part of this post, that being said the [source code](https://github.com/chopfitzroy/me) for this entire blog is available on GitHub so I encourage you to check it out if you are interested in trying these tools out for yourself.
 
 ### Taking SEO seriously
 
@@ -55,9 +55,9 @@ Overall I am really happy with where I got to on this and think I achieved the a
 
 ### Interactive and informative code snippets
 
-This was easily the most important thing to me. In previous blogging I had noticed a pattern in the terms of content I enjoyed authoring. Most of this content was situated around the JavaScript/TypeScript space so I wanted to make sure that these two languages got the most love when it came to interactive code snippets.
+This was easily the most important thing to me. In previous blogging I had noticed a pattern in the terms of content I enjoyed authoring. Most of this content was situated around the TypeScript and functional programming, so I wanted to make sure that the presentation of any code snippets had the best possible experience for the reader.
 
-I explored a ton of options in this space and the top contenders were [Shiki Twoslash](https://shikijs.github.io/twoslash/), [Sandpack](https://sandpack.codesandbox.io/) and [Code Hike](https://codehike.org/) (which actually leverages [Sandpack](https://sandpack.codesandbox.io/) for it's previews 🤯).
+I explored a ton of options in this space and the top contenders were [Shiki Twoslash](https://shikijs.github.io/twoslash/), [Sandpack](https://sandpack.codesandbox.io/) and [Code Hike](https://codehike.org/).
 
 Each of these options have serious pros and cons and I encourage you to check them all out if you are thinking of doing something similar. For myself [Code Hike](https://codehike.org/) ended up being the best option, [Shiki Twoslash](https://shikijs.github.io/twoslash/) actually had it beat on enhanced TypeScript support and [Sandpack](https://sandpack.codesandbox.io/) is arguably more customisable but [Code Hike](https://codehike.org/) has the nicest _out of the box_ features and allowed me to get up and running quickly. Additionally [Code Hike](https://codehike.org/) provided the most streamlined way to provide code _walk throughs_ which I consider to be a top priority as far as my blog is concerned.
 
@@ -84,7 +84,7 @@ export { trap };
 
 This was arguably the most technical challenge of setting up my new blog. Historically my partner and I had used a combination of screenshots and word documents when proofing my posts. I desperately wanted to improve this process moving forward and make it as streamlined as possible.
 
-The challenge here was introducing a system that improved the proofing process without dictating any design decisions related to the structure of the application or adding to the overall weight of the application once it was deployed.
+The challenge here was introducing a system that improved the proofing process without dictating any design decisions related to the structure of the application or adding to the overall weight once deployed.
 
 Enter [Netlify Deploy Previews](https://www.netlify.com/products/deploy-previews/) 🥰 now considering I am deploying a [Next.js](https://nextjs.org/) application my first thought was to deploy with [Vercel](https://vercel.com/) given they are the creators of [Next.js](https://nextjs.org/) after all. However [Netlify Deploy Previews](https://www.netlify.com/products/deploy-previews/) are just **too damn good** when it comes to creating a feedback/proofing loop, especially if you want a process that exists separate to your applications codebase.
 
@@ -92,6 +92,6 @@ I already had the [Netlify GitHub App](https://github.com/apps/netlify) installe
 
 ### Reflection
 
-Now that we are officially live I must say I am extremely happy with the overall result. I set out to create something that I could call my own and I honestly feel like I've created my own little cozy corner on the internet. There is still a ton of things I would like to do moving forward and this will definitely be a place where I experiment with different ideas and technologies.
+Now that my blog is _officially_ live I have say I am extremely happy with the overall result. I set out to create something that I could call my own and I honestly feel like I've created my own little cozy corner on the internet. There is still a ton of things I would like to do moving forward and this will definitely be a place where I experiment with different ideas and technologies.
 
 Phew! Thanks for making it this far 🥰 until next time. Stay safe out there 👋
