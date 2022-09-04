@@ -38,7 +38,7 @@ Unhappy with the solutions available to me I asked myself, what is the problem I
 
 Understanding the problem clearly helped me to understand why correct typing is so important to me. If I am trying to catch every error then the `try` block functionality is fine. Even the `unknown` type is somewhat acceptable as in most instances I will be handling the `catch` in the same way irrespective of the error thrown. However when I want to target a specific error or group of errors it is very useful if TypeScript can help me determine what those errors are.
 
-With a solid understanding of the problem I was trying to solve I set out to see how other people were solving this problem. One of the things that immediately jumped out to me was how [fp-ts](https://gcanti.github.io/fp-ts/) were solving this problem with [TaskEither](https://gcanti.github.io/fp-ts/modules/TaskEither.ts.html).
+With a solid understanding of the problem I was trying to solve I set out to see how other developers were approaching this problem. One of the things that immediately jumped out to me was how [fp-ts](https://gcanti.github.io/fp-ts/) were solving this problem with [TaskEither](https://gcanti.github.io/fp-ts/modules/TaskEither.ts.html).
 
 > `TaskEither<E, A>` represents an asynchronous computation that either yields a value of type `A` or fails yielding an error of type `E`.
 
@@ -65,7 +65,7 @@ return response;
 
 Notice something different? There is no `try` in the above snippet, so what does this mean? It could mean the code is _less safe_ in the sense that I now only cater for any instance that extends the `Error` constrcutor.
 
-Could the above pattern be considered back practice? Probably it is certainly less robust that wrapping everything in `try` but part of me considers that a good thing. Doing the above I am being more precise about what I am expecting and creating a faster feedback loop for when something I am not expecting occurs.
+Could the above pattern be considered back practice? Probably. It is certainly less robust than wrapping everything in `try` but part of me considers that a good thing. Doing the above I am being more precise about what I am expecting and creating a faster feedback loop for when something I am not expecting occurs.
 
 What do I mean by that? Essentially by being precise about what kind of error I am filtering for **any error that does not fill this criteria will either crash the application entirely** or hit my [error boundary](https://reactjs.org/docs/error-boundaries.html). This means that I can rapidly surface behaviours that I am not aware of or may not have catered for without them being obfuscated by whatever fallback behavior I have otherwise defined.
 
