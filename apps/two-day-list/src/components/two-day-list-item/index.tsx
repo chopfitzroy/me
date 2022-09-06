@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Delete } from "@icon-park/react";
-import { TwoDay } from "../two-day-list/useTwoDayList";
-
-interface TwoDayListItemProps extends TwoDay {
+interface TwoDayListItemProps {
+  title: string;
+  checked: boolean;
   toggle: () => void;
   remove: () => void;
 }

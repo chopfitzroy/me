@@ -8,10 +8,12 @@ interface TwoDayListFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
-export interface TwoDay {
-  title: string;
-  checked: boolean;
-}
+type TwoDay = Map<string, string | boolean>;
+
+// export interface TwoDay {
+//   title: string;
+//   checked: boolean;
+// }
 
 type AddTwoDaySignature = (item: TwoDay) => void;
 type RemoveTwoDaySignature = (item: TwoDay) => void;
@@ -36,9 +38,10 @@ const useTwoDayList = () => {
 
   const toggleTwoDay = useCallback<RemoveTwoDaySignature>((item) => {
     setTwoDayList((current) => {
-      const { title, checked } = item;
+      const next = new Map(item);
+      next.set('checkd', !next.get('checked'));
       current.delete(item);
-      current.add({ title, checked: !checked });
+      current.add(next);
     });
   }, []);
 
@@ -48,7 +51,11 @@ const useTwoDayList = () => {
         return;
       }
       const title = event.currentTarget.elements.title.value;
-      addTwoDay({ title, checked: false });
+      const item = new Map();
+      item.set("title", title);
+      item.set("checked", false);
+      addTwoDay(item);
+      // addTwoDay({ title, checked: false });
       event.preventDefault();
       formRef.current.reset();
     },
@@ -58,7 +65,8 @@ const useTwoDayList = () => {
   const formattedTwoDayList = useMemo(() => {
     return [...todoList].map((item) => {
       return {
-        ...item,
+        title: item.get('title'),
+        checked: item.get('checked'),
         toggle: () => toggleTwoDay(item),
         remove: () => removeTwoDay(item),
       };
