@@ -7,7 +7,8 @@ const trap =
       const result = await handler(...args);
       return [undefined, result];
     } catch (err) {
-      return [err, undefined];
+      const result =  err ?? new Error(`Nullish value recieved in 'trap'`);
+      return [result, undefined];
     }
   };
 

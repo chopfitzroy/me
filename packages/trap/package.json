@@ -26,6 +26,8 @@
   },
   "homepage": "https://github.com/chopfitzroy/me#readme",
   "devDependencies": {
+    "config": "*",
+    "tsconfig": "*",
     "tsup": "^6.2.0"
   }
 }
