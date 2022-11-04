@@ -1,0 +1,112 @@
+---
+draft: true
+title: "TypeScript and error handling"
+publishedAt: "August 30, 2022"
+description: "Smarter error handling with accurate types!"
+---
+
+I've been thinking a lot about error handling in TypeScript lately. The more I think about it the more I dislike the `try` block.
+
+The problem with `try` is that whatever you `catch` is considered `unknown` by TypeScript. Now don't get me wrong this is the correct way for TypeScript to handle this issue. While most developers `throw` with an `Error` there is nothing stopping them from using `throw` with `null`, `false`, or something else entirely.
+
+Below is an example of a basic `try` block implementation.
+
+```ts try-catch.ts
+const functionToFail = async (shouldThrow: boolean) => {
+    if (shouldThrow) {
+        throw new Error('Failure');
+    }
+    
+    return 'Success';
+}
+
+try {
+    const response = await functionToFail(true);
+    return response;
+} catch (err) {
+    console.log('Something went wrong', err); // `err` is of type `unknown`
+}
+```
+
+In the above example `err` is of type `unknown` despite the fact that TypeScript has full scope over the `functionToFail`. Now this is technically correct because `functionToFail` could reference something internally that might throw any number of errorrs.
+
+Furthermore if I remove the `try` block completely TypeScript does nothing to warn me that calling `functionToFail` will throw an error and crash the process. Again this behavior is correct in terms of what TypeScript should and shouldn't handle, but I want a way to warn developers consuming my code that an error can be thrown and that it will be of a certain type.
+
+With all of that in mind, whats the solution? JavaScript does not allow me to catch specific errors. I could use `instanceof` to check whether an error was instantiated with a specific constructor, or whether an error extends the base `Error` constructor. However this is somewhat clunky especially when I don't even know if the code I am wrapping will throw the error I am try to target with `instancceof`.
+
+Unhappy with the solutions available to me I asked myself, what is the problem I am actually trying to solve? Is it catching every error? Or is it catching a specific error? Now obviously this will be a case by case basis, but most of the time when I am thinking about error handling I am targetting a specific error or group of errors.
+
+Understanding the problem clearly helped me to understand why correct typing is so important to me. If I am trying to catch every error then the `try` block functionality is fine. Even the `unknown` type is somewhat acceptable as in most instances I will be handling the `catch` in the same way irrespective of the error thrown. However when I want to target a specific error or group of errors it is very useful if TypeScript can help me determine what those errors are.
+
+With a solid understanding of the problem I was trying to solve I set out to see how other developers were approaching this problem. One of the things that immediately jumped out to me was how [fp-ts](https://gcanti.github.io/fp-ts/) were solving this problem with [TaskEither](https://gcanti.github.io/fp-ts/modules/TaskEither.ts.html).
+
+> `TaskEither<E, A>` represents an asynchronous computation that either yields a value of type `A` or fails yielding an error of type `E`.
+
+The [fp-ts](https://gcanti.github.io/fp-ts/) implementation comes with more ceremony than I am will to commit to, however the underlying principle is sound. So what does an basic implementation of that look like? Below is an example similar to the above but this time `functionToFail` can resolve with either the string `'Success'` or an `Error`.
+
+```ts resolve-error.ts
+const functionToFail = async (shouldThrow: boolean) => {
+    if (shouldThrow) {
+        return new Error('Failure');
+    }
+    
+    return 'Success';
+}
+
+const response = await functionToFail(true); // `response` is of type `Error` or 'Success'
+
+if (response instanceof Error) { // Using `instanceof` here makes sense because we know `Error` is a valid type of `response`
+    console.log('Something went wrong', response);
+    return;
+}
+
+return response;
+```
+
+Notice something different? There is no `try` in the above snippet, so what does this mean? It could mean the code is _less safe_ in the sense that I now only cater for any instance that extends the `Error` constrcutor.
+
+Could the above pattern be considered back practice? Probably. It is certainly less robust than wrapping everything in `try` but part of me considers that a good thing. Doing the above I am being more precise about what I am expecting and creating a faster feedback loop for when something I am not expecting occurs.
+
+What do I mean by that? Essentially by being precise about what kind of error I am filtering for **any error that does not fill this criteria will either crash the application entirely** or hit my [error boundary](https://reactjs.org/docs/error-boundaries.html). This means that I can rapidly surface behaviours that I am not aware of or may not have catered for without them being obfuscated by whatever fallback behavior I have otherwise defined.
+
+The above is all good and well for my own code, but what about when I am consuming a third party library? How do I improve typing on functions I am consuming? Well for that I wrote a little helper function.
+
+```ts trap.ts
+type U<T> = T | undefined;
+
+const trap =
+  <T extends (...args: any[]) => any>(handler: T) =>
+  async (...args: Parameters<T>): Promise<[unknown, U<ReturnType<T>>]> => {
+    try {
+      const result = await handler(...args);
+      return [undefined, result];
+    } catch (err) {
+      return [err, undefined];
+    }
+  };
+```
+
+The `trap` function takes an `async` function and returns a [curried](https://javascript.info/currying-partials) version of that function which is wrapped in a `try` block. It always returns an array of which the first value will either be the error thrown or `undefined` and the second value will be the resolved value or `undefined`.
+
+This pattern is heavily inspired by [error handling in Go](https://earthly.dev/blog/golang-errors/) and follows a similar pattern of returning errors as values as opposed to explicitly having to `throw` them. This function does however return the potential error as the first value of the array as opposed to the second in an attempt to force myself to be more conscientious of errors as I am developing new features.
+
+What I like most about this pattern though is that it is reminiscent of [React hooks](https://reactjs.org/docs/hooks-intro.html) in the way that it reads and as such should be at least familiar to most frontend developers.
+
+So how does this work? Below is an example using [localForage](https://localforage.github.io/localForage/).
+
+```ts local-forage.ts
+import { getItem } from 'localForage';
+
+const trappedGetItem = (getItem);
+
+const getSomeKey = async () => {
+    const [err, value] = await trappedGetItem('somekey')
+
+    if (err instanceof Error) {
+        console.log(`There was an error reading 'somekey' from the cache`, err);
+        return;
+    }
+
+    return value;
+}
+```

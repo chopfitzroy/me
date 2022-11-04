@@ -8,7 +8,7 @@ For the longest time I've wanted to build a blog from scratch, something I could
 
 Well after years of failed attempts and moving onto the _next thing_ I am happy to say I have finally built a blog the way I want.
 
-What was the main difference this time? I had a clear vision of what I wanted. I have blogged before on platforms like [Medium](https://medium.com/@crashybang/about), as well as hosting an [11ty starter kit](https://chopfitzroy.dev/). But none of that had really stuck... I wasn't invested in the outcome, I didn't know what I wanted to write about and I had no schedule or motivators to encourage me to keep going.
+What was the main difference this time? I had a clear vision of what I wanted. I have blogged before on platforms like [Medium](https://medium.com/@crashybang/about), as well as hosting an [11ty starter kit](https://github.com/chopfitzroy/chopfitzroy.dev). But none of that had really stuck... I wasn't invested in the outcome, I didn't know what I wanted to write about and I had no schedule or motivators to encourage me to keep going.
 
 So this time I outlined what I wanted to achieve _long_ before I wrote any code. Here is a list of things I knew I wanted.
 
@@ -16,65 +16,82 @@ So this time I outlined what I wanted to achieve _long_ before I wrote any code.
 - Something that supported `.mdx` files which are my favourite way of authoring content.
 - Something fast with good SEO preferably a static site generator if possible.
 - Something that considers the reading experience a top priority.
-- First class TypeScript support in terms of code snippets.
+- Interactive and informative code snippets that could be easily walked through.
 - A workflow that allowed my partner to proof read my posts and provide feedback before publishing.
 
 So with that in mind let's break down how I achieved the above.
 
-### Building something extenable
+### Building something extendable
 
-There were a couple of key critera here, I wanted something that didn't have too much _magic_ and utilized technologies I enjoyed working with. The technologies I wanted to include were primary [React]() and [Tailwind]().
+There were a couple of key critera here, I wanted something that didn't have too much _magic_ and utilized technologies I enjoyed working with. The technologies I wanted to include were primarily [React](https://beta.reactjs.org/) and [Tailwind](https://tailwindcss.com/).
 
-Now one of my other critera was something with good SEO and preferably a static site generator, initially I reached for [Astro]() which I had been reading about a lot and supported [React]() and [Tailwind]() in the way that I wanted.
+Based on my other critera in particular good SEO I had a preference for static site generators, initially I reached for [Astro](https://astro.build/) which I had been reading about a lot at the time and that supported [React](https://beta.reactjs.org/) and [Tailwind](https://tailwindcss.com/) in the way that I wanted.
 
-Unfortunately I also wanted to use [Shiki Twoslash]() which I will discuss more later for TypeScript snippets and no matter how hard [I tried]() I could not figure out a way to make this work with [Astro](). So what now? Well the next obvious choice was [Next.js]() which I knew about but have never used personally.
+Originally I wanted to include [Shiki Twoslash](https://shikijs.github.io/twoslash/) for it's **amazing** TypeScript snippets. Unfortunately I could [not  get this up and running](https://github.com/shikijs/twoslash/issues/148) with [Astro](https://astro.build/). So I ended up going with [Next.js](https://nextjs.org/) which has been an absolute please to work with.
 
-Like most people I have heard of and even used [Vercel]() so I was familiar enough with what [Next.js]() was but have never been lucky enough to work with it professionally, spoiler alert it's amazing! The first thing I did was setup `.mdx` file support so I could author blog posts using this format. However it pretty quickly became apparent that the [suggested way](https://nextjs.org/docs/advanced-features/using-mdx) of setting this up while adequate created a somewhat awkward publishing flow.
+The first thing I set out to do was setup `.mdx` file support so I could author blog posts using my preferred format. It quickly became apparent that the [suggested way](https://nextjs.org/docs/advanced-features/using-mdx) of setting this up while adequate created a somewhat awkward publishing flow.
 
-Excited by this new tool and enjoying the process so far I set out to investigate how other developers were solving this problem, and boy oh boy was it my lucky day when I stumbled across [Lee Robinson's own blog](https://leerob.io/) which is also powered by [Next.js]() and uses [contentlayer](https://www.contentlayer.dev/) for content management. I cannot **overstate** just how much this tool changes the game! It makes authoring content in [Next.js]() applications an absolute pleasure!
+Enjoying everything else about [Next.js](https://nextjs.org/) I set out to investigate how other developers were managing their own `.mdx` workflow. During this time I was fortunate enough to stumble across [Lee Robinson's blog](https://leerob.io/) which uses [Contentlayer](https://www.contentlayer.dev/) for content management. I cannot overstate how pleasant this tool is to work with, it made publishing `.mdx` files with [Next.js](https://nextjs.org/) an absolute breeze. 
 
-Setting this tools up is a tad involved and not really something I want to go into as part of this post, that being said the [source code](https://github.com/chopfitzroy/me) for this entire blog is available on Github so I encourage you to check it out if you are interested in trying these tools out for yourself.
+**Update:** Since publishing this article [Lee Robinson's blog](https://leerob.io/) has moved over to [Sanity](https://www.sanity.io/) so if you are interested in his original implementation be sure to work through [his repositories](https://github.com/leerob/leerob.io) history.
 
-### Building with SEO in mind
+Setting up [Contentlayer](https://www.contentlayer.dev/) up is a relatively involved process and not really something I want to go into as part of this post, that being said the [source code](https://github.com/chopfitzroy/me) for this entire blog is available on GitHub so I encourage you to check it out if you are interested in trying these tools out for yourself.
+
+### Taking SEO seriously
 
 Usually when I build something for myself I consider SEO an absolute last priority. This isn't because I don't want people to find what I'm building but more that most of what I build is for myself and I'm not really bothered about whether or not other people can find it.
 
-This time I wanted to make sure I could be found, in fact I wanted to put as much effort into being found as possible. This time I've got something to say and I want to make sure people can hear it! 📣 
+Moving forward I want to change this and definitely put an effort into making myself more easily found online. Currently this means utilizing tools like [`next-sitemap`](https://github.com/iamvishnusankar/next-sitemap) as well as relying on a lot of the optimizations [Next.js](https://nextjs.org/) already makes under the hood.
 
-For the most part this meant using things like [`next-sitemap`](https://github.com/iamvishnusankar/next-sitemap) and relying on a lot of the optimizations [Next.js]() already makes under the hood.
+This is definitely an area where I would like to do some further study and improve my own understanding of what makes for good SEO. In the past I have been fortunate enough to work with people well versed in this area who have handled a lot of the heavy lifting.
 
-As it stands I feel like I have set myself up for success in this area. There is still a ton of improvement that can be made here and I am looking forward to researching how to further fine tune my content.
-
-### Building something that makes reading enjoyable
+### Making sure that reading content was enjoyable
 
 There is nothing I love more than a blog that is primarily focused around the content it delivers, minimal use of popups, carousels, etc... I spent a lot of time agonizing over font families and color palletes (especially dark mode) this time round.
 
-I'd read a bit about [Tufte CSS](https://edwardtufte.github.io/tufte-css/) and even found [this blog](https://lawler.io/) on [Hacker News](https://news.ycombinator.com/news) that employed similar techniques. I knew I wanted something like this that really felt like it _got out of the way_ and just let readers read!
+I'd read a bit about [Tufte CSS](https://edwardtufte.github.io/tufte-css/) and even found [a blog](https://lawler.io/) on Hacker News that employed similar techniques. I knew I wanted something like this that really felt like it _got out of the way_ and just let readers read!
 
 Overall I am really happy with where I got to on this and think I achieved the aesthetic I initally set out to uncover. It is worth noting that a huge part of my success here can be attributed to the [`@tailwindcss/typography`](https://tailwindcss.com/docs/typography-plugin) plugin which made styling markdown pages an absolute breeze.
 
-### Building something with best in class TypeScript support 
+### Interactive and informative code snippets
 
-This was easily the most important thing to me. In [previous](https://chopfitzroy.dev/) blogging I had noticed a pattern in the terms of content I enjoyed authoring. Most of this content was situated around the JavaScript/TypeScript space so I wanted to make sure that these two languages got the most love when it came to interactive code snippets.
+This was easily the most important thing to me. In previous blogging I had noticed a pattern in the terms of content I enjoyed authoring. Most of this content was situated around the TypeScript and functional programming, so I wanted to make sure that the presentation of any code snippets had the best possible experience for the reader.
 
-Enter [Shiki Twoslash](https://shikijs.github.io/twoslash/) 🎉 I had been watching this library for some time and knew that it was going to be the secrect sauce that took my TypeScript snippets to the next level. There were a [number of challenges]() in terms of getting it up and running but now that the hard work is over it's hard to imagine a time without it!
+I explored a ton of options in this space and the top contenders were [Shiki Twoslash](https://shikijs.github.io/twoslash/), [Sandpack](https://sandpack.codesandbox.io/) and [Code Hike](https://codehike.org/).
 
-```ts twoslash
-interface IdLabel {
-  id: number /* some fields */;
-}
-interface NameLabel {
-  name: string /* other fields */;
-}
-type NameOrId<T extends number | string> = T extends number
-  ? IdLabel
-  : NameLabel;
-// This comment should not be included
+Each of these options have serious pros and cons and I encourage you to check them all out if you are thinking of doing something similar. For myself [Code Hike](https://codehike.org/) ended up being the best option, [Shiki Twoslash](https://shikijs.github.io/twoslash/) actually had it beat on enhanced TypeScript support and [Sandpack](https://sandpack.codesandbox.io/) is arguably more customisable but [Code Hike](https://codehike.org/) has the nicest _out of the box_ features and allowed me to get up and running quickly. Additionally [Code Hike](https://codehike.org/) provided the most streamlined way to provide code _walk throughs_ which I consider to be a top priority as far as my blog is concerned.
 
-// ---cut---
-function createLabel<T extends number | string>(idOrName: T): NameOrId<T> {
-  throw "unimplemented";
-}
+Below is a very basic example of [Code Hike](https://codehike.org/) in action, notice how it places extra emphasie on the function declaration?
 
-let a = createLabel("typescript");
+```ts example.ts focus=3:12
+type U<T> = T | undefined;
+
+const trap =
+  <T extends (...args: any[]) => any>(handler: T) =>
+  async (...args: Parameters<T>): Promise<[unknown, U<ReturnType<T>>]> => {
+    try {
+      const result = await handler(...args);
+      return [undefined, result];
+    } catch (err) {
+      return [err, undefined];
+    }
+  };
+
+export { trap };
 ```
+
+### Creating a workflow that made proofing easier
+
+This was arguably the most technical challenge of setting up my new blog. Historically my partner and I had used a combination of screenshots and word documents when proofing my posts. I desperately wanted to improve this process moving forward and make it as streamlined as possible.
+
+The challenge here was introducing a system that improved the proofing process without dictating any design decisions related to the structure of the application or adding to the overall weight once deployed.
+
+Enter [Netlify Deploy Previews](https://www.netlify.com/products/deploy-previews/) 🥰 now considering I am deploying a [Next.js](https://nextjs.org/) application my first thought was to deploy with [Vercel](https://vercel.com/) given they are the creators of [Next.js](https://nextjs.org/) after all. However [Netlify Deploy Previews](https://www.netlify.com/products/deploy-previews/) are just **too damn good** when it comes to creating a feedback/proofing loop, especially if you want a process that exists separate to your applications codebase.
+
+I already had the [Netlify GitHub App](https://github.com/apps/netlify) installed against my GitHub account so there really was no configuration required to get this working. The most time consuming part of the process was setting my partner up with GitHub and Netlify accounts so I could add her as a team member to enable deploy previews!
+
+### Reflection
+
+Now that my blog is _officially_ live I have say I am extremely happy with the overall result. I set out to create something that I could call my own and I honestly feel like I've created my own little cozy corner on the internet. There is still a ton of things I would like to do moving forward and this will definitely be a place where I experiment with different ideas and technologies.
+
+Phew! Thanks for making it this far 🥰 until next time. Stay safe out there 👋

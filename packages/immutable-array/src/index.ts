@@ -18,7 +18,12 @@ const atIndex = <T = unknown>(payload: U<T>[], index: number): U<T> => {
   return item;
 };
 
-const replaceMultiple = <T = unknown>(
+
+const remove = <T = unknown>(payload: U<T>[], ...args: number[]): U<T>[] => {
+  return payload.filter((_, index) => !args.includes(index));
+}
+
+const replace = <T = unknown>(
   payload: U<T>[],
   ...args: [index: number, value: U<T>][]
 ): U<T>[] => {
@@ -33,27 +38,28 @@ const replaceMultiple = <T = unknown>(
   }, payload);
 };
 
-const replace = <T = unknown>(
+const update = <T = unknown>(
   payload: U<T>[],
   index: number,
   value: U<T>
 ): U<T>[] => {
-  return replaceMultiple<T>(payload, [index, value]);
+  return replace<T>(payload, [index, value]);
 };
 
-const findAndReplace = <T = unknown>(
+const findAndUpdate = <T = unknown>(
   payload: U<T>[],
   find: (item: U<T>) => boolean,
   value: T
 ): U<T>[] => {
   const index = payload.findIndex(find);
-  return replace<T>(payload, index, value);
+  return update<T>(payload, index, value);
 };
 
 const swap = <T = unknown>(payload: U<T>[], a: number, b: number): U<T>[] => {
   const aValue = atIndex<T>(payload, a);
   const bValue = atIndex<T>(payload, b);
-  return replaceMultiple<T>(payload, [a, bValue], [b, aValue]);
+  return replace<T>(payload, [a, bValue], [b, aValue]);
 };
 
-export { swap, head, tail, replace, atIndex, findAndReplace, replaceMultiple };
+export { swap, head, tail, remove, update, replace, atIndex, findAndUpdate  };
+

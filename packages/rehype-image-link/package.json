@@ -20,6 +20,8 @@
     "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {
+    "config": "*",
+    "tsconfig": "*",
     "tsup": "^6.2.0"
   }
 }
